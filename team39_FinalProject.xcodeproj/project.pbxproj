@@ -15,10 +15,11 @@
 		CB079A622CF92B8100D1D22A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB079A612CF92B8100D1D22A /* Assets.xcassets */; };
 		CB079A652CF92B8100D1D22A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CB079A642CF92B8100D1D22A /* Base */; };
 		CB079A6D2CF92C7D00D1D22A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB079A6C2CF92C7D00D1D22A /* GoogleService-Info.plist */; };
-		CB079A702CF92F5C00D1D22A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CB079A6F2CF92F5C00D1D22A /* FirebaseAnalytics */; };
-		CB079A722CF92F5C00D1D22A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CB079A712CF92F5C00D1D22A /* FirebaseAuth */; };
-		CB079A742CF92F5C00D1D22A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CB079A732CF92F5C00D1D22A /* FirebaseFirestore */; };
-		CB079A762CF92F5C00D1D22A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = CB079A752CF92F5C00D1D22A /* FirebaseStorage */; };
+		CB079A7E2CFD4E8E00D1D22A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CB079A7D2CFD4E8E00D1D22A /* FirebaseAuth */; };
+		CB079A802CFD4E8E00D1D22A /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = CB079A7F2CFD4E8E00D1D22A /* FirebaseCore */; };
+		CB079A822CFD4E8E00D1D22A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CB079A812CFD4E8E00D1D22A /* FirebaseFirestore */; };
+		CB079A842CFD4E8E00D1D22A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = CB079A832CFD4E8E00D1D22A /* FirebaseStorage */; };
+		CB079A8C2CFD51FC00D1D22A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CB079A8B2CFD51FC00D1D22A /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,11 +42,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB079A702CF92F5C00D1D22A /* FirebaseAnalytics in Frameworks */,
-				CB079A762CF92F5C00D1D22A /* FirebaseStorage in Frameworks */,
-				CB079A722CF92F5C00D1D22A /* FirebaseAuth in Frameworks */,
-				CB079A742CF92F5C00D1D22A /* FirebaseFirestore in Frameworks */,
 				05D323ECF1CA4B6512C53880 /* Pods_team39_FinalProject.framework in Frameworks */,
+				CB079A822CFD4E8E00D1D22A /* FirebaseFirestore in Frameworks */,
+				CB079A802CFD4E8E00D1D22A /* FirebaseCore in Frameworks */,
+				CB079A8C2CFD51FC00D1D22A /* Alamofire in Frameworks */,
+				CB079A842CFD4E8E00D1D22A /* FirebaseStorage in Frameworks */,
+				CB079A7E2CFD4E8E00D1D22A /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +68,6 @@
 				E598FC2A803C0DBB177E6A92 /* Pods-team39_FinalProject.debug.xcconfig */,
 				E5192ECCAF60D5580CF4ADFD /* Pods-team39_FinalProject.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -114,7 +115,6 @@
 				CB079A512CF92B7E00D1D22A /* Sources */,
 				CB079A522CF92B7E00D1D22A /* Frameworks */,
 				CB079A532CF92B7E00D1D22A /* Resources */,
-				F2CFE4553598986063594BF6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -122,10 +122,11 @@
 			);
 			name = team39_FinalProject;
 			packageProductDependencies = (
-				CB079A6F2CF92F5C00D1D22A /* FirebaseAnalytics */,
-				CB079A712CF92F5C00D1D22A /* FirebaseAuth */,
-				CB079A732CF92F5C00D1D22A /* FirebaseFirestore */,
-				CB079A752CF92F5C00D1D22A /* FirebaseStorage */,
+				CB079A7D2CFD4E8E00D1D22A /* FirebaseAuth */,
+				CB079A7F2CFD4E8E00D1D22A /* FirebaseCore */,
+				CB079A812CFD4E8E00D1D22A /* FirebaseFirestore */,
+				CB079A832CFD4E8E00D1D22A /* FirebaseStorage */,
+				CB079A8B2CFD51FC00D1D22A /* Alamofire */,
 			);
 			productName = team39_FinalProject;
 			productReference = CB079A552CF92B7E00D1D22A /* team39_FinalProject.app */;
@@ -156,7 +157,8 @@
 			);
 			mainGroup = CB079A4C2CF92B7E00D1D22A;
 			packageReferences = (
-				CB079A6E2CF92F5C00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CB079A7C2CFD4E8E00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CB079A8A2CFD51FC00D1D22A /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = CB079A562CF92B7E00D1D22A /* Products */;
 			projectDirPath = "";
@@ -202,23 +204,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F2CFE4553598986063594BF6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-team39_FinalProject/Pods-team39_FinalProject-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-team39_FinalProject/Pods-team39_FinalProject-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-team39_FinalProject/Pods-team39_FinalProject-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -457,7 +442,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CB079A6E2CF92F5C00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		CB079A7C2CFD4E8E00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
@@ -465,28 +450,41 @@
 				minimumVersion = 11.5.0;
 			};
 		};
+		CB079A8A2CFD51FC00D1D22A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CB079A6F2CF92F5C00D1D22A /* FirebaseAnalytics */ = {
+		CB079A7D2CFD4E8E00D1D22A /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CB079A6E2CF92F5C00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		CB079A712CF92F5C00D1D22A /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CB079A6E2CF92F5C00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = CB079A7C2CFD4E8E00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		CB079A732CF92F5C00D1D22A /* FirebaseFirestore */ = {
+		CB079A7F2CFD4E8E00D1D22A /* FirebaseCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CB079A6E2CF92F5C00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = CB079A7C2CFD4E8E00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		CB079A812CFD4E8E00D1D22A /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB079A7C2CFD4E8E00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
-		CB079A752CF92F5C00D1D22A /* FirebaseStorage */ = {
+		CB079A832CFD4E8E00D1D22A /* FirebaseStorage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CB079A6E2CF92F5C00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = CB079A7C2CFD4E8E00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		CB079A8B2CFD51FC00D1D22A /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB079A8A2CFD51FC00D1D22A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
