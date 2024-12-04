@@ -108,7 +108,7 @@ class AnswerView: UIView {
         saveButton.layer.cornerRadius = 16
 
         // Mark Completed Button
-        markCompletedButton.setTitle("Mark as Completed and View on Leetcode", for: .normal)
+        markCompletedButton.setTitle("Mark as Completed and View Solution", for: .normal)
         markCompletedButton.backgroundColor = UIColor(
             red: 12 / 255.0,
             green: 10 / 255.0,
@@ -199,7 +199,7 @@ class AnswerView: UIView {
             saveButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -50),
             saveButton.heightAnchor.constraint(equalToConstant: 50),
 
-            markCompletedButton.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 20),
+            markCompletedButton.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 10),
             markCompletedButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 50),
             markCompletedButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -50),
             markCompletedButton.heightAnchor.constraint(equalToConstant: 50),

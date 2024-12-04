@@ -38,19 +38,19 @@ class AnswerViewController: UIViewController, SFSpeechRecognizerDelegate {
         super.viewDidLoad()
         
         // Request Speech recognition permission
-        SFSpeechRecognizer.requestAuthorization { status in
-                    DispatchQueue.main.async {
-                        switch status {
-                        case .authorized:
-                            print("Speech recognition authorized.")
-                        case .denied, .restricted, .notDetermined:
-                            print("Speech recognition is not available.")
-                        @unknown default:
-                            print("Unknown authorization status.")
-                        }
-                    }
-                }
-                setupVoiceInputButton()
+//        SFSpeechRecognizer.requestAuthorization { status in
+//                    DispatchQueue.main.async {
+//                        switch status {
+//                        case .authorized:
+//                            print("Speech recognition authorized.")
+//                        case .denied, .restricted, .notDetermined:
+//                            print("Speech recognition is not available.")
+//                        @unknown default:
+//                            print("Unknown authorization status.")
+//                        }
+//                    }
+//                }
+        setupVoiceInputButton()
 
         answerView.saveButton.addTarget(self, action: #selector(didTapSave), for: .touchUpInside)
         answerView.markCompletedButton.addTarget(self, action: #selector(didTapMarkCompleted), for: .touchUpInside)
@@ -307,13 +307,55 @@ class AnswerViewController: UIViewController, SFSpeechRecognizerDelegate {
         updateVoiceInputButton(isListening: true)
     }
 
+//    @objc private func didTapVoiceInput() {
+//        if audioEngine.isRunning {
+//            stopVoiceRecognition()
+//        } else {
+//            startVoiceRecognition()
+//        }
+//    }
+    
     @objc private func didTapVoiceInput() {
-        if audioEngine.isRunning {
-            stopVoiceRecognition()
-        } else {
-            startVoiceRecognition()
+
+        switch SFSpeechRecognizer.authorizationStatus() {
+        case .notDetermined:
+            SFSpeechRecognizer.requestAuthorization { [weak self] status in
+                DispatchQueue.main.async {
+                    switch status {
+                    case .authorized:
+                        print("Speech recognition authorized.")
+                        self?.startVoiceRecognition()
+                    case .denied, .restricted, .notDetermined:
+                        print("Speech recognition is not available.")
+                        self?.showPermissionDeniedAlert()
+                    @unknown default:
+                        print("Unknown authorization status.")
+                    }
+                }
+            }
+        case .authorized:
+            if audioEngine.isRunning {
+                stopVoiceRecognition()
+            } else {
+                startVoiceRecognition()
+            }
+        case .denied, .restricted:
+            showPermissionDeniedAlert()
+        @unknown default:
+            print("Unknown authorization status.")
         }
     }
+
+    private func showPermissionDeniedAlert() {
+        let alert = UIAlertController(
+            title: "Speech Recognition Unavailable",
+            message: "Please enable speech recognition in Settings to use voice input.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+
 
     private func stopVoiceRecognition() {
         audioEngine.stop()
