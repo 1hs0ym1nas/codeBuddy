@@ -61,11 +61,7 @@ class QuestionViewController: UIViewController {
         remainingTime = totalTime
         startCountdown()
     }
-    
-//    private func updateUI(with question: Question) {
-//        let formattedTitle = formatTitleSlug(question.titleSlug)
-//        questionView.updateTitle(formattedTitle)
-//    }
+
 
     private func formatTitleSlug(_ slug: String) -> String {
         return slug.split(separator: "-").map { $0.capitalized }.joined(separator: " ")

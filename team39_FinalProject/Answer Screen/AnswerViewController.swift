@@ -1,7 +1,8 @@
 import UIKit
 import Firebase
+import Speech
 
-class AnswerViewController: UIViewController {
+class AnswerViewController: UIViewController, SFSpeechRecognizerDelegate {
     private let answerView = AnswerView()
     private let questionID: String
     private let leetcodeLink: String
@@ -9,6 +10,12 @@ class AnswerViewController: UIViewController {
     private var remainingTime: Int
     private let titleSlug: String
     private var timer: Timer?
+    
+    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
+    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    private var recognitionTask: SFSpeechRecognitionTask?
+    private let audioEngine = AVAudioEngine()
+    private var previousRecognitionText: String = ""
 
     init(questionID: String, leetcodeLink: String, user: User, remainingTime: Int, titleSlug: String) {
         self.questionID = questionID
@@ -29,9 +36,25 @@ class AnswerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Request Speech recognition permission
+        SFSpeechRecognizer.requestAuthorization { status in
+                    DispatchQueue.main.async {
+                        switch status {
+                        case .authorized:
+                            print("Speech recognition authorized.")
+                        case .denied, .restricted, .notDetermined:
+                            print("Speech recognition is not available.")
+                        @unknown default:
+                            print("Unknown authorization status.")
+                        }
+                    }
+                }
+                setupVoiceInputButton()
 
         answerView.saveButton.addTarget(self, action: #selector(didTapSave), for: .touchUpInside)
         answerView.markCompletedButton.addTarget(self, action: #selector(didTapMarkCompleted), for: .touchUpInside)
+        answerView.voiceInputButton.addTarget(self, action: #selector(didTapVoiceInput), for: .touchUpInside)
 
 
         answerView.updateTitle(formatTitleSlug(titleSlug))
@@ -69,8 +92,8 @@ class AnswerViewController: UIViewController {
                       let answerText = data["answerText"] as? String,
                       let isCompleted = data["isCompleted"] as? Bool,
                       let timestamp = data["timestamp"] as? Timestamp else {
-                          return
-                      }
+                    return
+                }
 
                 let answer = Answer(
                     questionID: self.questionID,
@@ -155,7 +178,7 @@ class AnswerViewController: UIViewController {
                     print("Error fetching completed answers: \(error)")
                     return
                 }
-
+                
                 guard let documents = snapshot?.documents else { return }
                 
                 self.user.solvedQuestions = documents.compactMap { doc in
@@ -164,8 +187,8 @@ class AnswerViewController: UIViewController {
                           let answerText = data["answerText"] as? String,
                           let isCompleted = data["isCompleted"] as? Bool,
                           let timestamp = data["timestamp"] as? Timestamp else {
-                              return nil
-                          }
+                        return nil
+                    }
                     return Answer(
                         questionID: questionID,
                         answerText: answerText,
@@ -173,10 +196,11 @@ class AnswerViewController: UIViewController {
                         timestamp: timestamp.dateValue()
                     )
                 }
-
+                
                 print("The user solved \(self.user.solvedQuestions.count) questions.")
             }
     }
+    
 
     private func startCountdown() {
         timer?.invalidate()
@@ -199,11 +223,118 @@ class AnswerViewController: UIViewController {
         let minutes = remainingTime / 60
         let seconds = remainingTime % 60
         answerView.updateCountdown(String(format: "%02d:%02d", minutes, seconds))
+        
     }
+    
 
     private func showTimeUpAlert() {
         let alert = UIAlertController(title: "Time is up!", message: "You can continue writing your answer.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+    
+    
+    // Voice Input logics here
+    
+    private func setupVoiceInputButton() {
+        // Add action to the voice input button
+        answerView.voiceInputButton.addTarget(self, action: #selector(didTapVoiceInput), for: .touchUpInside)
+    }
+ 
+    private func startVoiceRecognition() {
+        if recognitionTask != nil {
+            recognitionTask?.cancel()
+            recognitionTask = nil
+        }
+
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
+            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+        } catch {
+            print("Audio session setup failed: \(error.localizedDescription)")
+            return
+        }
+
+        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+        guard let recognitionRequest = recognitionRequest else {
+            print("Unable to create recognition request.")
+            return
+        }
+
+        let inputNode = audioEngine.inputNode
+
+        recognitionRequest.shouldReportPartialResults = true
+
+        // replace previous recognized texts to null
+        previousRecognitionText = ""
+
+        recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest) { [weak self] result, error in
+            guard let self = self else { return }
+            
+            if let result = result {
+                let recognizedText = result.bestTranscription.formattedString
+                
+                if recognizedText != self.previousRecognitionText {
+                    let newText = String(recognizedText.dropFirst(self.previousRecognitionText.count))
+                    self.previousRecognitionText = recognizedText
+                    
+                    DispatchQueue.main.async {
+                        let currentText = self.answerView.textView.text ?? ""
+                        self.answerView.textView.text = currentText + newText
+                    }
+                }
+            }
+            
+            if error != nil || result?.isFinal == true {
+                self.stopVoiceRecognition()
+            }
+        }
+        
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, when in
+            self.recognitionRequest?.append(buffer)
+        }
+
+        audioEngine.prepare()
+        do {
+            try audioEngine.start()
+        } catch {
+            print("Audio engine start failed: \(error.localizedDescription)")
+        }
+
+        // Update to active
+        updateVoiceInputButton(isListening: true)
+    }
+
+    @objc private func didTapVoiceInput() {
+        if audioEngine.isRunning {
+            stopVoiceRecognition()
+        } else {
+            startVoiceRecognition()
+        }
+    }
+
+    private func stopVoiceRecognition() {
+        audioEngine.stop()
+        audioEngine.inputNode.removeTap(onBus: 0)
+        recognitionRequest?.endAudio()
+        recognitionTask?.cancel()
+        recognitionTask = nil
+        // Update to inactive
+        updateVoiceInputButton(isListening: false)
+    }
+    
+    private func updateVoiceInputButton(isListening: Bool) {
+        // Change voice input button icon and color based on status
+        if isListening {
+            answerView.voiceInputButton.setImage(UIImage(systemName: "waveform"), for: .normal)
+            answerView.voiceInputButton.tintColor = .blue
+            answerView.voiceInputButton.backgroundColor = .white
+        } else {
+            answerView.voiceInputButton.setImage(UIImage(systemName: "mic"), for: .normal)
+            answerView.voiceInputButton.tintColor = .white
+            answerView.voiceInputButton.backgroundColor = .blue
+        }
     }
 }

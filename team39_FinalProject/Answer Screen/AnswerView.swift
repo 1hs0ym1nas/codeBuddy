@@ -1,3 +1,4 @@
+
 import UIKit
 
 class AnswerView: UIView {
@@ -9,6 +10,7 @@ class AnswerView: UIView {
     let textView = UITextView()
     let saveButton = UIButton(type: .system)
     let markCompletedButton = UIButton(type: .system)
+    let voiceInputButton = UIButton(type: .system)
 
     private let circleLayer = CAShapeLayer()
     private let progressLayer = CAShapeLayer()
@@ -25,7 +27,6 @@ class AnswerView: UIView {
     private func setupUI() {
         backgroundColor = .white
 
-        // Add scrollView and contentView
         addSubview(scrollView)
         scrollView.addSubview(contentView)
 
@@ -56,10 +57,6 @@ class AnswerView: UIView {
         )
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
-        titleLabel.layer.shadowColor = UIColor.lightGray.cgColor
-        titleLabel.layer.shadowOffset = CGSize(width: 1, height: 1)
-        titleLabel.layer.shadowOpacity = 0.4
-        titleLabel.layer.shadowRadius = 1.5
 
         // Countdown Circle View
         countdownCircleView.backgroundColor = .white
@@ -91,6 +88,13 @@ class AnswerView: UIView {
         textView.isScrollEnabled = true
         textView.textContainerInset = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
 
+        // Voice Input Button
+        voiceInputButton.setImage(UIImage(systemName: "mic"), for: .normal)
+        voiceInputButton.tintColor = .white
+        voiceInputButton.backgroundColor = .blue
+        voiceInputButton.layer.cornerRadius = 24
+        voiceInputButton.clipsToBounds = true
+
         // Save Button
         saveButton.setTitle("Save", for: .normal)
         saveButton.backgroundColor = UIColor(
@@ -109,7 +113,8 @@ class AnswerView: UIView {
             red: 12 / 255.0,
             green: 10 / 255.0,
             blue: 189 / 255.0,
-            alpha: 1.0)
+            alpha: 1.0
+        )
         markCompletedButton.setTitleColor(.white, for: .normal)
         markCompletedButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
         markCompletedButton.layer.cornerRadius = 16
@@ -119,6 +124,7 @@ class AnswerView: UIView {
         contentView.addSubview(countdownCircleView)
         countdownCircleView.addSubview(countdownLabel)
         contentView.addSubview(textView)
+        contentView.addSubview(voiceInputButton)
         contentView.addSubview(saveButton)
         contentView.addSubview(markCompletedButton)
 
@@ -157,6 +163,7 @@ class AnswerView: UIView {
         textView.translatesAutoresizingMaskIntoConstraints = false
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         markCompletedButton.translatesAutoresizingMaskIntoConstraints = false
+        voiceInputButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             // Title Label
@@ -176,9 +183,15 @@ class AnswerView: UIView {
 
             // Text View
             textView.topAnchor.constraint(equalTo: countdownCircleView.topAnchor, constant: 50),
-            textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             textView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+
+            // Voice Input Button (at bottom-right corner of textView)
+            voiceInputButton.bottomAnchor.constraint(equalTo: textView.bottomAnchor, constant: -10),
+            voiceInputButton.trailingAnchor.constraint(equalTo: textView.trailingAnchor, constant: -10),
+            voiceInputButton.widthAnchor.constraint(equalToConstant: 48),
+            voiceInputButton.heightAnchor.constraint(equalToConstant: 48),
 
             // Save Button
             saveButton.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 20),
@@ -186,7 +199,6 @@ class AnswerView: UIView {
             saveButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -50),
             saveButton.heightAnchor.constraint(equalToConstant: 50),
 
-            // Mark Completed Button
             markCompletedButton.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 20),
             markCompletedButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 50),
             markCompletedButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -50),
@@ -196,43 +208,44 @@ class AnswerView: UIView {
         textView.textContainerInset = UIEdgeInsets(top: 50, left: 8, bottom: 8, right: 8)
         countdownCircleView.layer.zPosition = 1
     }
-
-    func updateTitle(_ title: String) {
-        titleLabel.text = title
-    }
     
-    func updateCountdown(_ countdownText: String) {
+    func updateTitle(_ title: String) {
+            titleLabel.text = title
+        }
+    
+        func updateCountdown(_ countdownText: String) {
             countdownLabel.text = countdownText
         }
-
-    func updateCountdownProgress(_ progress: CGFloat) {
-        progressLayer.strokeEnd = progress
-
-        let startColor = UIColor(red: 12 / 255.0, green: 10 / 255.0, blue: 189 / 255.0, alpha: 1.0)
-        let endColor = UIColor.lightGray
-
-        let interpolatedColor = interpolateColor(from: startColor, to: endColor, progress: 1.0 - progress)
-        progressLayer.strokeColor = interpolatedColor.cgColor
-    }
-
-    private func interpolateColor(from startColor: UIColor, to endColor: UIColor, progress: CGFloat) -> UIColor {
-        var startRed: CGFloat = 0
-        var startGreen: CGFloat = 0
-        var startBlue: CGFloat = 0
-        var startAlpha: CGFloat = 0
-        startColor.getRed(&startRed, green: &startGreen, blue: &startBlue, alpha: &startAlpha)
-
-        var endRed: CGFloat = 0
-        var endGreen: CGFloat = 0
-        var endBlue: CGFloat = 0
-        var endAlpha: CGFloat = 0
-        endColor.getRed(&endRed, green: &endGreen, blue: &endBlue, alpha: &endAlpha)
-
-        let red = startRed + (endRed - startRed) * progress
-        let green = startGreen + (endGreen - startGreen) * progress
-        let blue = startBlue + (endBlue - startBlue) * progress
-        let alpha = startAlpha + (endAlpha - startAlpha) * progress
-
-        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
-    }
+    
+        func updateCountdownProgress(_ progress: CGFloat) {
+            progressLayer.strokeEnd = progress
+    
+            let startColor = UIColor(red: 12 / 255.0, green: 10 / 255.0, blue: 189 / 255.0, alpha: 1.0)
+            let endColor = UIColor.lightGray
+    
+            let interpolatedColor = interpolateColor(from: startColor, to: endColor, progress: 1.0 - progress)
+            progressLayer.strokeColor = interpolatedColor.cgColor
+        }
+    
+        private func interpolateColor(from startColor: UIColor, to endColor: UIColor, progress: CGFloat) -> UIColor {
+            var startRed: CGFloat = 0
+            var startGreen: CGFloat = 0
+            var startBlue: CGFloat = 0
+            var startAlpha: CGFloat = 0
+            startColor.getRed(&startRed, green: &startGreen, blue: &startBlue, alpha: &startAlpha)
+    
+            var endRed: CGFloat = 0
+            var endGreen: CGFloat = 0
+            var endBlue: CGFloat = 0
+            var endAlpha: CGFloat = 0
+            endColor.getRed(&endRed, green: &endGreen, blue: &endBlue, alpha: &endAlpha)
+    
+            let red = startRed + (endRed - startRed) * progress
+            let green = startGreen + (endGreen - startGreen) * progress
+            let blue = startBlue + (endBlue - startBlue) * progress
+            let alpha = startAlpha + (endAlpha - startAlpha) * progress
+    
+            return UIColor(red: red, green: green, blue: blue, alpha: alpha)
+        }
 }
+

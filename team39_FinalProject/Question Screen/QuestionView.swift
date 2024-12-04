@@ -60,8 +60,6 @@ class QuestionView: UIView {
         titleLabel.layer.shadowRadius = 1.5
 
 
-
-        // Countdown Circle View
         countdownCircleView.backgroundColor = .white
         countdownCircleView.layer.cornerRadius = 75
 
@@ -75,7 +73,6 @@ class QuestionView: UIView {
             alpha: 1.0
         )
 
-        // Add countdown circle layers
         setupCountdownCircle()
 
         // Description TextView
@@ -92,7 +89,6 @@ class QuestionView: UIView {
         descriptionTextView.isScrollEnabled = false
         descriptionTextView.textContainerInset = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
 
-        // Start Button
         startButton.setTitle("Start to write pseudocode >", for: .normal)
         startButton.backgroundColor = UIColor(
             red: 12/255.0,
@@ -178,7 +174,8 @@ class QuestionView: UIView {
 
             
         ])
-        descriptionTextView.textContainerInset = UIEdgeInsets(top: 55, left: 8, bottom: 8, right: 8)
+        
+        descriptionTextView.textContainerInset = UIEdgeInsets(top: 50, left: 8, bottom: 8, right: 8)
         countdownCircleView.layer.zPosition = 1
     }
 
