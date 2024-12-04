@@ -57,8 +57,33 @@ class AnswerViewController: UIViewController {
     private func loadPreviousAnswer() {
         if let savedAnswer = user.answers[questionID] {
             answerView.textView.text = savedAnswer.answerText
+        } else {
+            let db = Firestore.firestore()
+            db.collection("answers").document(user.userID).collection("userAnswers").document(questionID).getDocument { [weak self] snapshot, error in
+                guard let self = self else { return }
+                if let error = error {
+                    print("Error fetching previous answer: \(error)")
+                    return
+                }
+                guard let data = snapshot?.data(),
+                      let answerText = data["answerText"] as? String,
+                      let isCompleted = data["isCompleted"] as? Bool,
+                      let timestamp = data["timestamp"] as? Timestamp else {
+                          return
+                      }
+
+                let answer = Answer(
+                    questionID: self.questionID,
+                    answerText: answerText,
+                    isCompleted: isCompleted,
+                    timestamp: timestamp.dateValue()
+                )
+                self.user.answers[self.questionID] = answer
+                self.answerView.textView.text = answer.answerText
+            }
         }
     }
+
 
     @objc private func didTapSave() {
         saveAnswer(isCompleted: false)
@@ -97,6 +122,7 @@ class AnswerViewController: UIViewController {
                 print("Error saving to Firebase: \(error)")
             } else {
                 print("Answer saved to Firebase successfully.")
+                self.loadPreviousAnswer()
             }
         }
 
@@ -148,7 +174,7 @@ class AnswerViewController: UIViewController {
                     )
                 }
 
-                print("Loaded \(self.user.solvedQuestions.count) solved questions.")
+                print("The user solved \(self.user.solvedQuestions.count) questions.")
             }
     }
 
