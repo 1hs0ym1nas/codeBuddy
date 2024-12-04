@@ -13,7 +13,7 @@ extension RegisterViewController {
     
     func registerNewAccount() {
             guard let name = registerView.usernameTextField.text, !name.isEmpty else {
-            showAlert(message: "Name field cannot be empty.")
+            showAlert(message: "Username field cannot be empty.")
             return
         }
         

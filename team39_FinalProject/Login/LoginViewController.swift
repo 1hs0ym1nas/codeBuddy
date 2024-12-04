@@ -53,8 +53,17 @@ class LoginViewController: UIViewController {
             if let error = error {
                 self?.showAlert(message: error.localizedDescription)
             } else {
-                self?.showAlert(message: "Logged in successfully!")
-                self?.checkLoginState()
+                // Show the success alert and navigate to Leaderboard on dismiss
+                let alert = UIAlertController(
+                    title: "Success",
+                    message: "Logged in successfully!",
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    let leaderboardVC = LeaderboardViewController()
+                    self?.navigationController?.pushViewController(leaderboardVC, animated: true)
+                }))
+                self?.present(alert, animated: true)
             }
         }
     }

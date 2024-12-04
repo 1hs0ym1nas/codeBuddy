@@ -30,13 +30,31 @@ class RegisterViewController: UIViewController {
     }
     
     private func navigateToSignIn() {
-        navigationController?.popViewController(animated: true)
+        // Navigate explicitly to LoginViewController
+        if let navigationController = navigationController {
+            for controller in navigationController.viewControllers {
+                if controller is LoginViewController {
+                    navigationController.popToViewController(controller, animated: true)
+                    return
+                }
+            }
+        }
+        
+        // If LoginViewController is not in the stack, push it
+        let loginViewController = LoginViewController()
+        navigationController?.pushViewController(loginViewController, animated: true)
     }
     
-    @objc func onRegisterTapped(){
-        // creating a new user on Firebase
+    @objc private func onRegisterTapped() {
         registerNewAccount()
+
+        let alert = UIAlertController(
+            title: "Success",
+            message: "Registered successfully! Please log in.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
     }
-    
-    
 }

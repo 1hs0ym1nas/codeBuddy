@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		05D323ECF1CA4B6512C53880 /* Pods_team39_FinalProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E22A84CA59530AEB8B561F /* Pods_team39_FinalProject.framework */; };
+		1E508BA12D01096200E7BC65 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E508BA02D01096200E7BC65 /* LeaderboardViewController.swift */; };
+		1E508BA52D010A9B00E7BC65 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E508BA42D010A9B00E7BC65 /* LeaderboardView.swift */; };
+		1E508BA92D0116C000E7BC65 /* LeaderboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E508BA82D0116C000E7BC65 /* LeaderboardCell.swift */; };
 		1EB58D062D00008000EC1F25 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB58D052D00008000EC1F25 /* RegisterView.swift */; };
 		1EB58D082D00037100EC1F25 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB58D072D00037100EC1F25 /* RegisterViewController.swift */; };
 		1EB58D0A2D00049500EC1F25 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB58D092D00049500EC1F25 /* LoginView.swift */; };
@@ -29,6 +32,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E508BA02D01096200E7BC65 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
+		1E508BA42D010A9B00E7BC65 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
+		1E508BA82D0116C000E7BC65 /* LeaderboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardCell.swift; sourceTree = "<group>"; };
 		1EB58D052D00008000EC1F25 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		1EB58D072D00037100EC1F25 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		1EB58D092D00049500EC1F25 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -66,6 +72,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E508B9D2D01093300E7BC65 /* Leaderboard */ = {
+			isa = PBXGroup;
+			children = (
+				1E508BA02D01096200E7BC65 /* LeaderboardViewController.swift */,
+				1E508BA42D010A9B00E7BC65 /* LeaderboardView.swift */,
+				1E508BA82D0116C000E7BC65 /* LeaderboardCell.swift */,
+			);
+			path = Leaderboard;
+			sourceTree = "<group>";
+		};
 		1EB58D0D2D00072F00EC1F25 /* Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +139,7 @@
 		CB079A572CF92B7E00D1D22A /* team39_FinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				1E508B9D2D01093300E7BC65 /* Leaderboard */,
 				1EB58D102D00079D00EC1F25 /* Login */,
 				1EB58D0D2D00072F00EC1F25 /* Register */,
 				CB079A582CF92B7E00D1D22A /* AppDelegate.swift */,
@@ -248,12 +265,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EB58D162D000BBA00EC1F25 /* LandingView.swift in Sources */,
+				1E508BA92D0116C000E7BC65 /* LeaderboardCell.swift in Sources */,
 				1EB58D0C2D0004D500EC1F25 /* LoginViewController.swift in Sources */,
 				1EB58D0F2D00074400EC1F25 /* RegisterFirebaseManager.swift in Sources */,
+				1E508BA52D010A9B00E7BC65 /* LeaderboardView.swift in Sources */,
 				1EB58D0A2D00049500EC1F25 /* LoginView.swift in Sources */,
 				1EB58D082D00037100EC1F25 /* RegisterViewController.swift in Sources */,
 				1EB58D062D00008000EC1F25 /* RegisterView.swift in Sources */,
 				CB079A592CF92B7E00D1D22A /* AppDelegate.swift in Sources */,
+				1E508BA12D01096200E7BC65 /* LeaderboardViewController.swift in Sources */,
 				1EB58D142D0009E500EC1F25 /* ViewController.swift in Sources */,
 				CB079A5B2CF92B7E00D1D22A /* SceneDelegate.swift in Sources */,
 			);
