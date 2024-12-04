@@ -10,6 +10,8 @@ import UIKit
 import UIKit
 
 class RegisterView: UIView {
+    var onSignInTapped: (() -> Void)? // Callback for "Sign In Here"
+
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Sign Up"
@@ -129,6 +131,25 @@ class RegisterView: UIView {
         return button
     }()
     
+    private let alreadyHaveAccountLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Already Have An Account? "
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let signInLinkLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Sign In Here"
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .systemBlue
+        label.isUserInteractionEnabled = true // Make it tappable
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -154,6 +175,9 @@ class RegisterView: UIView {
         addSubview(confirmPasswordTextField)
         addSubview(confirmPasswordToggleButton)
         addSubview(signUpButton)
+        addSubview(alreadyHaveAccountLabel)
+        addSubview(signInLinkLabel)
+
         
         NSLayoutConstraint.activate([
             // Title Label
@@ -216,13 +240,27 @@ class RegisterView: UIView {
             signUpButton.topAnchor.constraint(equalTo: confirmPasswordTextField.bottomAnchor, constant: 30),
             signUpButton.leadingAnchor.constraint(equalTo: usernameLabel.leadingAnchor),
             signUpButton.trailingAnchor.constraint(equalTo: confirmPasswordTextField.trailingAnchor),
-            signUpButton.heightAnchor.constraint(equalToConstant: 50)
+            signUpButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            // Already Have An Account Label
+            alreadyHaveAccountLabel.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 20),
+            alreadyHaveAccountLabel.leadingAnchor.constraint(equalTo: signUpButton.leadingAnchor),
+            
+            // Sign In Link Label
+            signInLinkLabel.centerYAnchor.constraint(equalTo: alreadyHaveAccountLabel.centerYAnchor),
+            signInLinkLabel.leadingAnchor.constraint(equalTo: alreadyHaveAccountLabel.trailingAnchor, constant: 5)
         ])
     }
     
     private func setupActions() {
         passwordToggleButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
         confirmPasswordToggleButton.addTarget(self, action: #selector(toggleConfirmPasswordVisibility), for: .touchUpInside)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onSignInTappedAction))
+        signInLinkLabel.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func onSignInTappedAction() {
+        onSignInTapped?()
     }
     
     @objc private func togglePasswordVisibility() {

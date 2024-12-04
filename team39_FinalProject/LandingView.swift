@@ -93,12 +93,12 @@ class LandingView: UIView {
             welcomeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
             // Description Label
-            descriptionLabel.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 10),
+            descriptionLabel.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: 20),
             descriptionLabel.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: welcomeLabel.trailingAnchor),
             
             // Sign In Button
-            signInButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 40),
+            signInButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
             signInButton.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -10),
             signInButton.widthAnchor.constraint(equalToConstant: 120),
             signInButton.heightAnchor.constraint(equalToConstant: 50),

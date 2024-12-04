@@ -22,15 +22,23 @@ class LoginViewController: UIViewController {
     }
 
     private func setupActions() {
-        // Attach actions to buttons in the login view
         loginView.signInButton.addTarget(self, action: #selector(onSignInTapped), for: .touchUpInside)
+        
+        // Handle navigation to Sign Up
+        loginView.onSignUpTapped = { [weak self] in
+            self?.navigateToSignUp()
+        }
     }
     
+    private func navigateToSignUp() {
+        let registerViewController = RegisterViewController()
+        navigationController?.pushViewController(registerViewController, animated: true)
+    }
+
     @objc private func onSignInTapped() {
         let email = loginView.emailTextField.text ?? ""
         let password = loginView.passwordTextField.text ?? ""
         
-        // Validate fields
         guard !email.isEmpty else {
             showAlert(message: "Please enter your email.")
             return
@@ -41,7 +49,6 @@ class LoginViewController: UIViewController {
             return
         }
         
-        // Attempt Firebase sign-in
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
             if let error = error {
                 self?.showAlert(message: error.localizedDescription)
@@ -53,7 +60,6 @@ class LoginViewController: UIViewController {
     }
 
     private func checkLoginState() {
-        // Determine if a user is logged in and update the navigation bar
         if let _ = Auth.auth().currentUser {
             setupRightBarButton(isLoggedin: true)
         } else {
@@ -63,49 +69,26 @@ class LoginViewController: UIViewController {
 
     private func setupRightBarButton(isLoggedin: Bool) {
         if isLoggedin {
-            // Show Logout button only if logged in
-            let barIcon = UIBarButtonItem(
-                image: UIImage(systemName: "rectangle.portrait.and.arrow.forward"),
-                style: .plain,
-                target: self,
-                action: #selector(onLogoutTapped)
-            )
             let barText = UIBarButtonItem(
                 title: "Logout",
                 style: .plain,
                 target: self,
                 action: #selector(onLogoutTapped)
             )
-            navigationItem.rightBarButtonItems = [barIcon, barText]
+            navigationItem.rightBarButtonItem = barText
         } else {
-            // Remove navigation items if not logged in
-            navigationItem.rightBarButtonItems = nil
+            navigationItem.rightBarButtonItem = nil
         }
     }
 
-    @objc private func onRegisterTapped() {
-        // Navigate to the Register screen
-        let registerViewController = RegisterViewController()
-        navigationController?.pushViewController(registerViewController, animated: true)
-    }
-
     @objc private func onLogoutTapped() {
-        let alert = UIAlertController(
-            title: "Logout",
-            message: "Are you sure you want to log out?",
-            preferredStyle: .actionSheet
-        )
-        alert.addAction(UIAlertAction(title: "Log Out", style: .destructive) { _ in
-            do {
-                try Auth.auth().signOut()
-                self.showAlert(message: "Logged out successfully!")
-                self.checkLoginState()
-            } catch {
-                self.showAlert(message: "Error signing out.")
-            }
-        })
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        present(alert, animated: true)
+        do {
+            try Auth.auth().signOut()
+            showAlert(message: "Logged out successfully!")
+            checkLoginState()
+        } catch {
+            showAlert(message: "Error signing out.")
+        }
     }
 
     private func showAlert(message: String) {

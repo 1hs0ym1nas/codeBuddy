@@ -8,6 +8,8 @@
 import UIKit
 
 class LoginView: UIView {
+    var onSignUpTapped: (() -> Void)? // Callback for "Sign Up Here"
+
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Sign In"
@@ -64,6 +66,25 @@ class LoginView: UIView {
         button.tintColor = .darkGray
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    private let signUpLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Don't have an account? "
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let signUpLinkLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Sign Up Here"
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .systemBlue
+        label.isUserInteractionEnabled = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     let signInButton: UIButton = {
@@ -134,6 +155,8 @@ class LoginView: UIView {
         addSubview(separatorLabel)
         addSubview(facebookButton)
         addSubview(googleButton)
+        addSubview(signUpLabel)
+        addSubview(signUpLinkLabel)
         
         NSLayoutConstraint.activate([
             // Title Label
@@ -186,12 +209,24 @@ class LoginView: UIView {
             googleButton.topAnchor.constraint(equalTo: facebookButton.bottomAnchor, constant: 10),
             googleButton.leadingAnchor.constraint(equalTo: facebookButton.leadingAnchor),
             googleButton.trailingAnchor.constraint(equalTo: facebookButton.trailingAnchor),
-            googleButton.heightAnchor.constraint(equalToConstant: 50)
+            googleButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            // Sign Up Label
+            signUpLabel.topAnchor.constraint(equalTo: googleButton.bottomAnchor, constant: 30),
+            signUpLabel.leadingAnchor.constraint(equalTo: emailLabel.leadingAnchor),
+            signUpLinkLabel.centerYAnchor.constraint(equalTo: signUpLabel.centerYAnchor),
+            signUpLinkLabel.leadingAnchor.constraint(equalTo: signUpLabel.trailingAnchor, constant: 5)
         ])
     }
     
     private func setupActions() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onSignUpTappedAction))
+        signUpLinkLabel.addGestureRecognizer(tapGesture)
         passwordToggleButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
+    }
+    
+    @objc private func onSignUpTappedAction() {
+        onSignUpTapped?()
     }
     
     @objc private func togglePasswordVisibility() {

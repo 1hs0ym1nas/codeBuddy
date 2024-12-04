@@ -20,6 +20,17 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         registerView.signUpButton.addTarget(self, action: #selector(onRegisterTapped), for: .touchUpInside)
+        setupActions()
+    }
+    
+    private func setupActions() {
+        registerView.onSignInTapped = { [weak self] in
+            self?.navigateToSignIn()
+        }
+    }
+    
+    private func navigateToSignIn() {
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func onRegisterTapped(){
