@@ -12,43 +12,44 @@ class UserProfileViewController: UIViewController {
     
     // MARK: - Properties
     private let userProfileView = UserProfileView(frame: UIScreen.main.bounds)
-    private var username: String = "" // 初始用户名为空，等待从 Firebase 加载
-    private var email: String = "" // 初始邮箱为空
-    private var score: Int = 0 // 初始分数
-    private var profileImage: UIImage? = UIImage(named: "profile_placeholder") // 默认头像占位图
+    private var username: String = "" // Initial username is empty, waiting to be loaded from Firebase
+    private var email: String = "" // Initial email is empty
+    private var score: Int = 0 // Initial score
+    private var profileImage: UIImage? = UIImage(named: "profile_placeholder") // Default profile image placeholder
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        print("View did load") // 调试日志
+        print("View did load") // Debug log
 
-        // 添加 UserProfileView
+        // Add UserProfileView
         view.addSubview(userProfileView)
 
-        // 配置页面按钮行为
+        // Set up button actions
         setupEditButtonAction()
         authenticateUser()
-        
     }
+
+    // Check if the user is logged in
     private func authenticateUser() {
         if let currentUser = Auth.auth().currentUser {
-                // 如果用户已登录
+                // If the user is already logged in
                 print("User already logged in: \(currentUser.uid), displayName: \(currentUser.displayName ?? "Unknown User")")
                 
-                // 在这里可以执行已登录用户的相关操作
-                // 比如更新 UI 或从 Firebase 获取用户数据
+                // Perform actions for logged-in users
+                // For example, update UI or fetch user data from Firebase
                 fetchUserProfileFromFirebase()
 
             } else {
-                // 如果用户没有登录，提示用户登录
+                // If the user is not logged in, show login prompt
                 print("No user logged in.")
-                // 你可以选择跳转到登录界面，或者弹出登录框
+                // You can choose to navigate to the login screen or show a login prompt
                 showLoginAlert()
             }
     }
     
-    // 提示用户登录的弹框
+    // Show login alert if user is not logged in
     private func showLoginAlert() {
         let alert = UIAlertController(
             title: "Not Logged In",
@@ -64,15 +65,14 @@ class UserProfileViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
 
-    // 跳转到登录页面的逻辑
+    // Navigate to the login screen
     private func redirectToLogin() {
-        
         let loginViewController = LoginViewController()
         self.navigationController?.pushViewController(loginViewController, animated: true)
-        
     }
 
     // MARK: - Firebase Data Fetch
+    // Fetch user profile data from Firebase
     private func fetchUserProfileFromFirebase() {
         FirebaseManager.shared.fetchUserProfile { [weak self] result in
             guard let self = self else { return }
@@ -80,23 +80,23 @@ class UserProfileViewController: UIViewController {
             case .success(let data):
                 print("Fetched user profile data: \(data)")
 
-                // 更新数据
+                // Update data
                 self.username = data["userName"] as? String ?? "Unknown User"
                 self.email = data["email"] as? String ?? "unknown@example.com"
                 
-                // 通过 solvedQuestions 数组的长度来计算 score
+                // Calculate score based on the length of the solvedQuestions array
                 if let solvedQuestions = data["solvedQuestions"] as? [String] {
                     self.score = solvedQuestions.count
                 } else {
                     self.score = 0
                 }
 
-                // 如果有头像 URL，从网络加载图片
+                // If profile image URL is available, load the image from the network
                 if let profileImageURL = data["profileImageURL"] as? String {
                     self.loadProfileImage(from: profileImageURL)
                 }
 
-                // 更新界面
+                // Update the UI
                 DispatchQueue.main.async {
                     self.updateUserProfileView()
                 }
@@ -107,6 +107,7 @@ class UserProfileViewController: UIViewController {
         }
     }
 
+    // Load profile image from the provided URL
     private func loadProfileImage(from urlString: String) {
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
@@ -124,39 +125,40 @@ class UserProfileViewController: UIViewController {
     }
 
     // MARK: - Setup Methods
+    // Update the UserProfileView with the latest user data
     private func updateUserProfileView() {
         userProfileView.usernameLabel.text = username
         userProfileView.emailLabel.text = email
         userProfileView.scoreLabel.text = "Score: \(score)"
         userProfileView.profileImageView.image = profileImage
-        print("Updated User Profile View - Username: \(username), Email: \(email), Score: \(score)") // 调试日志
+        print("Updated User Profile View - Username: \(username), Email: \(email), Score: \(score)") // Debug log
     }
 
+    // Set up the Edit button action
     private func setupEditButtonAction() {
-        // 配置页面中 `Edit` 按钮的行为
         userProfileView.onEditButtonTapped = { [weak self] in
             self?.navigateToEditPage()
         }
-        print("Page Edit button action set up") // 调试日志
+        print("Page Edit button action set up") // Debug log
     }
 
     // MARK: - Actions
+    // Navigate to the Edit Profile Page
     private func navigateToEditPage() {
-        print("Navigating to Edit Profile Page") // 调试日志
+        print("Navigating to Edit Profile Page") // Debug log
 
         let editViewController = EditProfileViewController()
         editViewController.username = username
         editViewController.profileImage = profileImage
 
-        // 设置保存回调
+        // Set the save callback for the edit page
         editViewController.onSave = { [weak self] updatedUsername, updatedImage in
             guard let self = self else { return }
 
-            // 更新 Firebase 数据
+            // Update Firebase data
             FirebaseManager.shared.uploadProfileImage(image: updatedImage ?? UIImage()) { result in
                 switch result {
                 case .success(let imageURL):
-                    // 只传递 username 和 imageURL，不再传递 email
                     FirebaseManager.shared.updateUserProfile(username: updatedUsername, profileImageURL: imageURL) { result in
                         switch result {
                         case .success:
@@ -170,14 +172,14 @@ class UserProfileViewController: UIViewController {
                 }
             }
 
-            // 更新本地 UI
+            // Update the local UI
             self.username = updatedUsername
             self.profileImage = updatedImage
             self.updateUserProfileView()
             print("Profile updated successfully.")
         }
 
-        // 使用现有的导航控制器进行跳转
+        // Use the existing navigation controller to navigate
         navigationController?.pushViewController(editViewController, animated: true)
     }
 }

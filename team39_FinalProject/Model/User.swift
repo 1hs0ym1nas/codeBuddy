@@ -8,26 +8,26 @@
 import Foundation
 import FirebaseFirestore
 
-// User 模型，符合 Codable 协议以支持 Firebase 交互
+// User model, conforms to Codable protocol for Firebase interaction
 struct User: Codable {
-    @DocumentID var userID: String? // Firebase 自动生成的文档 ID
+    @DocumentID var userID: String? // Automatically generated Firebase document ID
     var userName: String
-    var profilePicURL: String? // 存储头像的 Firebase Storage URL
+    var profilePicURL: String? // Firebase Storage URL for the user's profile picture
     var email: String
     var score: Int
-    var answers: [String: String] // [QuestionID: Answer]
-    var solvedQuestions: [String] // List of QuestionIDs
+    var answers: [String: Answer] // [QuestionID: Answer] mapping
+    var solvedQuestions: [Answer] // List of Answer objects for solved questions
     var comments: [String] // List of CommentIDs
 
-    // 默认初始化器
+    // Default initializer
     init(
         userID: String? = nil,
         userName: String,
         profilePicURL: String? = nil,
         email: String,
         score: Int = 0,
-        answers: [String: String] = [:],
-        solvedQuestions: [String] = [],
+        answers: [String: Answer] = [:],
+        solvedQuestions: [Answer] = [],
         comments: [String] = []
     ) {
         self.userID = userID
@@ -40,19 +40,31 @@ struct User: Codable {
         self.comments = comments
     }
 
-    // 从 Firebase 数据中初始化
+    // Initialize from Firebase data
     init(from data: [String: Any]) {
         self.userID = data["userID"] as? String
         self.userName = data["userName"] as? String ?? ""
         self.profilePicURL = data["profilePicURL"] as? String
         self.email = data["email"] as? String ?? ""
         self.score = data["score"] as? Int ?? 0
-        self.answers = data["answers"] as? [String: String] ?? [:]
-        self.solvedQuestions = data["solvedQuestions"] as? [String] ?? []
+        
+        // Convert answers and solvedQuestions to the corresponding types
+        if let answerDict = data["answers"] as? [String: [String: Any]] {
+            self.answers = answerDict.compactMapValues { Answer(from: $0) }
+        } else {
+            self.answers = [:]
+        }
+        
+        if let solvedQuestionData = data["solvedQuestions"] as? [[String: Any]] {
+            self.solvedQuestions = solvedQuestionData.compactMap { Answer(from: $0) }
+        } else {
+            self.solvedQuestions = []
+        }
+        
         self.comments = data["comments"] as? [String] ?? []
     }
 
-    // 将模型数据转化为字典以保存到 Firebase
+    // Convert model data to dictionary for Firebase storage
     func toDictionary() -> [String: Any] {
         return [
             "userID": userID ?? "",
@@ -60,8 +72,8 @@ struct User: Codable {
             "profilePicURL": profilePicURL ?? "",
             "email": email,
             "score": score,
-            "answers": answers,
-            "solvedQuestions": solvedQuestions,
+            "answers": answers.mapValues { $0.toDictionary() }, // Convert Answer objects to dictionary
+            "solvedQuestions": solvedQuestions.map { $0.toDictionary() }, // Convert Answer objects to dictionary
             "comments": comments
         ]
     }

@@ -11,7 +11,7 @@ class AddCommentViewController: UIViewController {
 
     // MARK: - Properties
     private let addCommentView = AddCommentView()
-    var onSave: ((String) -> Void)? // 回调闭包
+    var onSave: ((String) -> Void)?
 
     // MARK: - Lifecycle
     override func loadView() {
@@ -32,7 +32,7 @@ class AddCommentViewController: UIViewController {
     // MARK: - Actions
     @objc private func saveButtonTapped() {
         guard let comment = addCommentView.commentTextView.text, !comment.isEmpty else { return }
-        onSave?(comment) // 回调传递评论
+        onSave?(comment) 
         dismiss(animated: true, completion: nil)
     }
 

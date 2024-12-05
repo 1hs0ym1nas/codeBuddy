@@ -11,18 +11,16 @@ import FirebaseAuth
 import FirebaseStorage
 
 class FirebaseManager {
-    // 单例
+    
     static let shared = FirebaseManager()
 
-    // Firestore 和 Storage 的引用
+    
     private let db = Firestore.firestore()
     private let storage = Storage.storage()
 
     private init() {}
 
-    // MARK: - 用户数据操作
-
-    /// 获取当前用户 ID
+    
     func getCurrentUserID() -> String? {
         if let currentUser = Auth.auth().currentUser {
             print("Current User ID: \(currentUser.uid)") // 打印用户 ID
@@ -33,7 +31,7 @@ class FirebaseManager {
         }
     }
 
-    /// 获取用户信息
+    
     func fetchUserProfile(completion: @escaping (Result<[String: Any], Error>) -> Void) {
         guard let userID = getCurrentUserID() else {
             completion(.failure(NSError(domain: "FirebaseManager", code: 401, userInfo: [NSLocalizedDescriptionKey: "User not logged in"])))
@@ -54,14 +52,14 @@ class FirebaseManager {
         }
     }
 
-    /// 更新用户信息
+    
     func updateUserProfile(username: String, profileImageURL: String?, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let userID = getCurrentUserID() else {
             completion(.failure(NSError(domain: "FirebaseManager", code: 401, userInfo: [NSLocalizedDescriptionKey: "User not logged in"])))
             return
         }
 
-        // 获取当前用户的文档
+        
         db.collection("users").document(userID).getDocument { document, error in
             if let error = error {
                 completion(.failure(error))
@@ -73,17 +71,17 @@ class FirebaseManager {
                 return
             }
 
-            // 更新数据，只更改 userName 和 profileImageURL，保留 email 字段
+            
             var updatedData: [String: Any] = [
                 "userName": username,
-                "email": currentEmail // 保持 email 字段不变
+                "email": currentEmail
             ]
             
             if let profileImageURL = profileImageURL {
-                updatedData["profileImageURL"] = profileImageURL // 如果有头像图片则更新
+                updatedData["profileImageURL"] = profileImageURL
             }
 
-            // 更新 Firestore 中的用户数据
+            
             self.db.collection("users").document(userID).setData(updatedData, merge: true) { error in
                 if let error = error {
                     completion(.failure(error))
@@ -94,9 +92,7 @@ class FirebaseManager {
         }
     }
 
-    // MARK: - 图片操作
-
-    /// 上传头像图片到 Firebase Storage
+    
     func uploadProfileImage(image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
         guard let userID = getCurrentUserID() else {
             completion(.failure(NSError(domain: "FirebaseManager", code: 401, userInfo: [NSLocalizedDescriptionKey: "User not logged in"])))

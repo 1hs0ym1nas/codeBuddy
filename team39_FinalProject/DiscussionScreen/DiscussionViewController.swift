@@ -12,15 +12,15 @@ class DiscussionViewController: UIViewController {
 
     // MARK: - Properties
     private let discussionView = DiscussionView()
-    private var comments: [Comment] = [] // 用于存储评论的数组
-    private var filteredComments: [Comment] = [] // 用于搜索后的过滤结果
-    private var isSearching = false // 判断是否在搜索
-    private let commentManager = CommentManager() // 用于管理评论的 Firebase 交互
+    private var comments: [Comment] = [] // Array to store comments
+    private var filteredComments: [Comment] = [] // Array to store filtered results after search
+    private var isSearching = false // Flag to check if searching
+    private let commentManager = CommentManager() // Used for managing comments and Firebase interaction
 
-    // 日期格式化器（全局属性，避免重复创建）
+    // Date formatter (global property to avoid recreating it multiple times)
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy HH:mm" // 格式化为 月/日/年 时:分
+        formatter.dateFormat = "MM/dd/yyyy HH:mm" // Format as Month/Day/Year Hour:Minute
         return formatter
     }()
 
@@ -36,19 +36,20 @@ class DiscussionViewController: UIViewController {
         
     }
     
+    // Authenticate the user (check if logged in)
     private func authenticateUser() {
         if let currentUser = Auth.auth().currentUser {
             print("User already logged in: \(currentUser.uid), displayName: \(currentUser.displayName ?? "Unknown User")")
-            // 用户已经登录，执行相关操作，例如获取用户信息、更新UI等
+            // User is logged in, proceed with loading comments
             loadCommentsFromFirebase()
         } else {
             print("No user logged in.")
-            // 用户未登录，执行登录或引导用户登录的操作
+            // User is not logged in, show login alert
             showLoginAlert()
         }
     }
 
-    // 提示用户登录的弹框
+    // Show an alert if the user is not logged in
     private func showLoginAlert() {
         let alert = UIAlertController(
             title: "Not Logged In",
@@ -64,7 +65,7 @@ class DiscussionViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
 
-    // 跳转到登录页面的逻辑
+    // Redirect to the login page
     private func redirectToLogin() {
         let loginViewController = LoginViewController()
         self.navigationController?.pushViewController(loginViewController, animated: true)
@@ -75,19 +76,21 @@ class DiscussionViewController: UIViewController {
     }
 
     // MARK: - Setup View
+    // Set up the view with the required configurations
     private func setupView() {
-        // 设置 TableView 的数据源和代理
+        // Set up TableView data source and delegate
         discussionView.commentsTableView.dataSource = self
         discussionView.commentsTableView.delegate = self
         
-        // 设置 SearchBar 的代理
+        // Set up SearchBar delegate
         discussionView.searchBar.delegate = self
 
-        // 设置 Add Button 点击事件
+        // Set up Add Button action
         discussionView.addButton.addTarget(self, action: #selector(addCommentTapped), for: .touchUpInside)
     }
 
     // MARK: - Firebase Data
+    // Load comments from Firebase
     private func loadCommentsFromFirebase() {
         commentManager.startListening { [weak self] result in
             guard let self = self else { return }
@@ -104,26 +107,27 @@ class DiscussionViewController: UIViewController {
     }
 
     // MARK: - Actions
+    // Handle the Add Comment button tap
     @objc private func addCommentTapped() {
         let addCommentVC = AddCommentViewController()
         addCommentVC.onSave = { [weak self] commentText in
             guard let self = self else { return }
 
-            // 确保当前用户已登录
+            // Ensure the user is logged in
             guard let currentUser = Auth.auth().currentUser else {
                 print("Error: User is not logged in")
                 return
             }
             
-            // 打印当前用户信息
+            // Print current user information
             print("Current User ID: \(currentUser.uid)")
             print("Current User Display Name: \(currentUser.displayName ?? "Unknown User")")
 
-            // 获取用户 ID 和用户名
+            // Get user ID and username
             let userID = currentUser.uid
             let userName = currentUser.displayName ?? "Unknown User"
 
-            // 创建新评论对象
+            // Create a new comment object
             let newComment = Comment(
                 text: commentText,
                 userID: userID,
@@ -131,7 +135,7 @@ class DiscussionViewController: UIViewController {
                 timestamp: Date()
             )
 
-            // 保存评论到 Firebase
+            // Save comment to Firebase
             self.commentManager.addComment(newComment) { result in
                 switch result {
                 case .success:
@@ -156,13 +160,13 @@ extension DiscussionViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath)
         let comment = isSearching ? filteredComments[indexPath.row] : comments[indexPath.row]
         
-        // 格式化时间戳
+        // Format timestamp
         let formattedTimestamp = dateFormatter.string(from: comment.timestamp)
         
-        // 获取评论的第一行
+        // Get the first line of the comment
         let firstLine = comment.text.components(separatedBy: "\n").first ?? comment.text
         
-        // 设置显示内容
+        // Set the display content
         cell.textLabel?.text = "\(comment.userName): \(firstLine)    \(formattedTimestamp)"
         return cell
     }
@@ -173,7 +177,7 @@ extension DiscussionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let comment = isSearching ? filteredComments[indexPath.row] : comments[indexPath.row]
         
-        // 显示完整评论内容的弹框
+        // Show full comment content in an alert
         let alertController = UIAlertController(
             title: "Comment Content",
             message: "\(comment.userName):\n\n\(comment.text)",
@@ -187,18 +191,19 @@ extension DiscussionViewController: UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {
-                let comment = isSearching ? filteredComments[indexPath.row] : comments[indexPath.row]
-                
-                // 判断是否有权限删除
-                if comment.userID == Auth.auth().currentUser?.uid {
-                    showDeleteConfirmation(comment, at: indexPath)
-                } else {
-                    showPermissionDeniedAlert()
-                }
+        if editingStyle == .delete {
+            let comment = isSearching ? filteredComments[indexPath.row] : comments[indexPath.row]
+            
+            // Check if the user has permission to delete the comment
+            if comment.userID == Auth.auth().currentUser?.uid {
+                showDeleteConfirmation(comment, at: indexPath)
+            } else {
+                showPermissionDeniedAlert()
             }
         }
+    }
 }
 
 // MARK: - UISearchBarDelegate
@@ -225,7 +230,7 @@ extension DiscussionViewController: UISearchBarDelegate {
 }
 
 extension DiscussionViewController {
-    /// 显示没有权限删除评论的提示框
+    /// Show an alert when the user doesn't have permission to delete a comment
     private func showPermissionDeniedAlert() {
         let alert = UIAlertController(
             title: "Permission Denied",
@@ -237,7 +242,7 @@ extension DiscussionViewController {
         present(alert, animated: true, completion: nil)
     }
 
-    /// 显示确认删除的提示框
+    /// Show a confirmation alert to delete a comment
     private func showDeleteConfirmation(_ comment: Comment, at indexPath: IndexPath) {
         let alert = UIAlertController(
             title: "Confirm Delete",
@@ -252,25 +257,26 @@ extension DiscussionViewController {
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
     }
-    private func deleteComment(_ comment: Comment, at indexPath: IndexPath) {
-            // 检查用户是否有权限删除
-            guard let currentUser = Auth.auth().currentUser, currentUser.uid == comment.userID else {
-                showPermissionDeniedAlert()
-                return
-            }
 
-            // 调用 CommentManager 来从 Firebase 中删除评论
-            commentManager.deleteComment(comment) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success:
-                    print("Comment deleted successfully.")
-                    // 从本地数组中移除该评论
-                    self.comments.remove(at: indexPath.row)
-                    //self.discussionView.commentsTableView.deleteRows(at: [indexPath], with: .automatic)
-                case .failure(let error):
-                    print("Failed to delete comment: \(error.localizedDescription)")
-                }
+    private func deleteComment(_ comment: Comment, at indexPath: IndexPath) {
+        // Check if the user has permission to delete
+        guard let currentUser = Auth.auth().currentUser, currentUser.uid == comment.userID else {
+            showPermissionDeniedAlert()
+            return
+        }
+
+        // Call CommentManager to delete the comment from Firebase
+        commentManager.deleteComment(comment) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                print("Comment deleted successfully.")
+                // Remove the comment from the local array
+                self.comments.remove(at: indexPath.row)
+                //self.discussionView.commentsTableView.deleteRows(at: [indexPath], with: .automatic)
+            case .failure(let error):
+                print("Failed to delete comment: \(error.localizedDescription)")
             }
         }
+    }
 }

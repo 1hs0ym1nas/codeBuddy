@@ -16,7 +16,6 @@ class CommentManager {
     private var commentsListener: ListenerRegistration?
 
     // MARK: - Load Comments
-    /// 从 Firebase 加载评论
     func loadComments(completion: @escaping (Result<[Comment], Error>) -> Void) {
         db.collection(commentsCollection)
             .order(by: "timestamp", descending: true)
@@ -33,15 +32,15 @@ class CommentManager {
 
                 let comments = documents.compactMap { doc -> Comment? in
                     var data = doc.data()
-                    data["commentID"] = doc.documentID // 手动添加 commentID
-                    return Comment(from: data) // 调用初始化器
+                    data["commentID"] = doc.documentID
+                    return Comment(from: data) //
                 }
                 completion(.success(comments))
             }
     }
 
     // MARK: - Add Comment
-    /// 添加新评论到 Firebase
+    
     func addComment(_ comment: Comment, completion: @escaping (Result<Comment, Error>) -> Void) {
         guard let currentUser = Auth.auth().currentUser else {
             completion(.failure(NSError(domain: "CommentManager", code: 401, userInfo: [NSLocalizedDescriptionKey: "User not logged in."])))
@@ -51,17 +50,17 @@ class CommentManager {
         var commentData = comment.toDictionary()
         commentData["commentID"] = nil // Firebase 自动生成 ID
 
-        // 获取 documentRef
+        
         let documentRef = db.collection(commentsCollection).document()
         commentData["commentID"] = documentRef.documentID // 设置生成的 documentID
 
-        // 将数据写入 Firestore
+        
         documentRef.setData(commentData) { error in
             if let error = error {
                 print("Error adding comment: \(error.localizedDescription)")
                 completion(.failure(error))
             } else {
-                // 成功后返回更新后的 comment
+                
                 var updatedComment = comment
                 updatedComment.commentID = documentRef.documentID
                 print("Comment added with ID: \(documentRef.documentID)")
@@ -71,7 +70,7 @@ class CommentManager {
     }
 
     // MARK: - Real-Time Listener
-    /// 启动对评论集合的实时监听
+    
     func startListening(completion: @escaping (Result<[Comment], Error>) -> Void) {
         commentsListener = db.collection(commentsCollection)
             .order(by: "timestamp", descending: true)
@@ -88,15 +87,15 @@ class CommentManager {
 
                 let comments = documents.compactMap { doc -> Comment? in
                     var data = doc.data()
-                    data["commentID"] = doc.documentID // 手动添加 commentID
-                    return Comment(from: data) // 调用初始化器
+                    data["commentID"] = doc.documentID
+                    return Comment(from: data)
                 }
                 completion(.success(comments))
             }
     }
 
     // MARK: - Stop Listening
-    /// 停止监听评论集合
+    
     func stopListening() {
         commentsListener?.remove()
         commentsListener = nil

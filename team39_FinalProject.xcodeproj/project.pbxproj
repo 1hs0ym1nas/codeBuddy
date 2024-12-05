@@ -20,7 +20,26 @@
 		BE347A852D00D87B0093F711 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347A7E2D00D87B0093F711 /* RegisterViewController.swift */; };
 		BE347A882D00D8870093F711 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347A872D00D8870093F711 /* LandingView.swift */; };
 		BE347A892D00D8870093F711 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347A862D00D8870093F711 /* ViewController.swift */; };
-		BE9AD4F22CF9AADF00602091 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9AD4EC2CF9AADF00602091 /* Question.swift */; };
+		BE347A8E2D00F6760093F711 /* LeaderBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347A8C2D00F6760093F711 /* LeaderBoardViewController.swift */; };
+		BE347A922D00F67D0093F711 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347A902D00F67D0093F711 /* MainScreenViewController.swift */; };
+		BE347A932D00F67D0093F711 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347A8F2D00F67D0093F711 /* MainScreenView.swift */; };
+		BE347A972D00F6870093F711 /* AnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347A942D00F6870093F711 /* AnswerView.swift */; };
+		BE347A982D00F6870093F711 /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347A952D00F6870093F711 /* AnswerViewController.swift */; };
+		BE347AA02D00F6900093F711 /* QuestionScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347A9E2D00F6900093F711 /* QuestionScreenViewController.swift */; };
+		BE347AA12D00F6900093F711 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347A992D00F6900093F711 /* QuestionViewController.swift */; };
+		BE347AA22D00F6900093F711 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347A9A2D00F6900093F711 /* QuestionView.swift */; };
+		BE347AA32D00F6900093F711 /* QuestionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347A9B2D00F6900093F711 /* QuestionScreenView.swift */; };
+		BE347AA42D00F6900093F711 /* QuestionTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347A9D2D00F6900093F711 /* QuestionTableViewManager.swift */; };
+		BE347AA52D00F6900093F711 /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347A9C2D00F6900093F711 /* QuestionTableViewCell.swift */; };
+		BE347AA72D00F6D90093F711 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347AA62D00F6D90093F711 /* HomeScreen.swift */; };
+		BE347AAA2D00F6F20093F711 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347AA92D00F6F20093F711 /* HomeScreenViewController.swift */; };
+		BE347AAC2D00F7290093F711 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347AAB2D00F7290093F711 /* Models.swift */; };
+		BE347AAE2D00F7390093F711 /* AFHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347AAD2D00F7390093F711 /* AFHelper.swift */; };
+		BE347AB32D00F7570093F711 /* TabBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347AAF2D00F7570093F711 /* TabBarManager.swift */; };
+		BE347AB42D00F7570093F711 /* APIConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347AB12D00F7570093F711 /* APIConfigs.swift */; };
+		BE347AB52D00F7570093F711 /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347AB02D00F7570093F711 /* Configs.swift */; };
+		BE347AB62D00F7570093F711 /* CountdownManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347AB22D00F7570093F711 /* CountdownManager.swift */; };
+		BE347ABA2D0101850093F711 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE347AB92D0101850093F711 /* Answer.swift */; };
 		BE9AD4F32CF9AADF00602091 /* ProblemSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9AD4EB2CF9AADF00602091 /* ProblemSet.swift */; };
 		BE9AD4F42CF9AADF00602091 /* Discussion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9AD4EA2CF9AADF00602091 /* Discussion.swift */; };
 		BE9AD4F52CF9AADF00602091 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9AD4ED2CF9AADF00602091 /* User.swift */; };
@@ -30,7 +49,6 @@
 		BE9AD4FA2CF9B06100602091 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9AD4F92CF9B06100602091 /* EditProfileViewController.swift */; };
 		BE9AD4FD2CFA2BD800602091 /* RobotoSerif_28pt_Condensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE9AD4FB2CFA2BD500602091 /* RobotoSerif_28pt_Condensed-Bold.ttf */; };
 		BE9AD4FE2CFA2BD800602091 /* RobotoSerif_28pt_Condensed-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE9AD4FC2CFA2BD800602091 /* RobotoSerif_28pt_Condensed-Black.ttf */; };
-		BE9AD5002CFA309F00602091 /* UserProfileTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9AD4FF2CFA309F00602091 /* UserProfileTestViewController.swift */; };
 		BE9AD5022CFA325E00602091 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9AD5012CFA325E00602091 /* EditProfileView.swift */; };
 		BE9AD5042CFA4A2100602091 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9AD5032CFA4A2100602091 /* FirebaseManager.swift */; };
 		BE9AD5062CFA547400602091 /* FirebaseTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9AD5052CFA547400602091 /* FirebaseTestHelper.swift */; };
@@ -60,17 +78,35 @@
 		BE347A7F2D00D87B0093F711 /* RegisterFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFirebaseManager.swift; sourceTree = "<group>"; };
 		BE347A862D00D8870093F711 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BE347A872D00D8870093F711 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+		BE347A8C2D00F6760093F711 /* LeaderBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardViewController.swift; sourceTree = "<group>"; };
+		BE347A8F2D00F67D0093F711 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		BE347A902D00F67D0093F711 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
+		BE347A942D00F6870093F711 /* AnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerView.swift; sourceTree = "<group>"; };
+		BE347A952D00F6870093F711 /* AnswerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerViewController.swift; sourceTree = "<group>"; };
+		BE347A992D00F6900093F711 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		BE347A9A2D00F6900093F711 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		BE347A9B2D00F6900093F711 /* QuestionScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionScreenView.swift; sourceTree = "<group>"; };
+		BE347A9C2D00F6900093F711 /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
+		BE347A9D2D00F6900093F711 /* QuestionTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTableViewManager.swift; sourceTree = "<group>"; };
+		BE347A9E2D00F6900093F711 /* QuestionScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionScreenViewController.swift; sourceTree = "<group>"; };
+		BE347AA62D00F6D90093F711 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		BE347AA92D00F6F20093F711 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
+		BE347AAB2D00F7290093F711 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		BE347AAD2D00F7390093F711 /* AFHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFHelper.swift; sourceTree = "<group>"; };
+		BE347AAF2D00F7570093F711 /* TabBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarManager.swift; sourceTree = "<group>"; };
+		BE347AB02D00F7570093F711 /* Configs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configs.swift; sourceTree = "<group>"; };
+		BE347AB12D00F7570093F711 /* APIConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigs.swift; sourceTree = "<group>"; };
+		BE347AB22D00F7570093F711 /* CountdownManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownManager.swift; sourceTree = "<group>"; };
+		BE347AB92D0101850093F711 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		BE9AD4E92CF9AADF00602091 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		BE9AD4EA2CF9AADF00602091 /* Discussion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discussion.swift; sourceTree = "<group>"; };
 		BE9AD4EB2CF9AADF00602091 /* ProblemSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemSet.swift; sourceTree = "<group>"; };
-		BE9AD4EC2CF9AADF00602091 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		BE9AD4ED2CF9AADF00602091 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BE9AD4EF2CF9AADF00602091 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		BE9AD4F02CF9AADF00602091 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		BE9AD4F92CF9B06100602091 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		BE9AD4FB2CFA2BD500602091 /* RobotoSerif_28pt_Condensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSerif_28pt_Condensed-Bold.ttf"; sourceTree = "<group>"; };
 		BE9AD4FC2CFA2BD800602091 /* RobotoSerif_28pt_Condensed-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSerif_28pt_Condensed-Black.ttf"; sourceTree = "<group>"; };
-		BE9AD4FF2CFA309F00602091 /* UserProfileTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTestViewController.swift; sourceTree = "<group>"; };
 		BE9AD5012CFA325E00602091 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		BE9AD5032CFA4A2100602091 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		BE9AD5052CFA547400602091 /* FirebaseTestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTestHelper.swift; sourceTree = "<group>"; };
@@ -159,14 +195,63 @@
 			path = Register;
 			sourceTree = "<group>";
 		};
+		BE347A8D2D00F6760093F711 /* LeaderBoard Screen */ = {
+			isa = PBXGroup;
+			children = (
+				BE347A8C2D00F6760093F711 /* LeaderBoardViewController.swift */,
+			);
+			path = "LeaderBoard Screen";
+			sourceTree = "<group>";
+		};
+		BE347A912D00F67D0093F711 /* Main Screen */ = {
+			isa = PBXGroup;
+			children = (
+				BE347A8F2D00F67D0093F711 /* MainScreenView.swift */,
+				BE347A902D00F67D0093F711 /* MainScreenViewController.swift */,
+			);
+			path = "Main Screen";
+			sourceTree = "<group>";
+		};
+		BE347A962D00F6870093F711 /* Answer Screen */ = {
+			isa = PBXGroup;
+			children = (
+				BE347A942D00F6870093F711 /* AnswerView.swift */,
+				BE347A952D00F6870093F711 /* AnswerViewController.swift */,
+			);
+			path = "Answer Screen";
+			sourceTree = "<group>";
+		};
+		BE347A9F2D00F6900093F711 /* Question Screen */ = {
+			isa = PBXGroup;
+			children = (
+				BE347A992D00F6900093F711 /* QuestionViewController.swift */,
+				BE347A9A2D00F6900093F711 /* QuestionView.swift */,
+				BE347A9B2D00F6900093F711 /* QuestionScreenView.swift */,
+				BE347A9C2D00F6900093F711 /* QuestionTableViewCell.swift */,
+				BE347A9D2D00F6900093F711 /* QuestionTableViewManager.swift */,
+				BE347A9E2D00F6900093F711 /* QuestionScreenViewController.swift */,
+			);
+			path = "Question Screen";
+			sourceTree = "<group>";
+		};
+		BE347AA82D00F6E40093F711 /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				BE347AA62D00F6D90093F711 /* HomeScreen.swift */,
+				BE347AA92D00F6F20093F711 /* HomeScreenViewController.swift */,
+			);
+			path = HomeScreen;
+			sourceTree = "<group>";
+		};
 		BE9AD4EE2CF9AADF00602091 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BE347AAB2D00F7290093F711 /* Models.swift */,
 				BE9AD4E92CF9AADF00602091 /* Comment.swift */,
 				BE9AD4EA2CF9AADF00602091 /* Discussion.swift */,
 				BE9AD4EB2CF9AADF00602091 /* ProblemSet.swift */,
-				BE9AD4EC2CF9AADF00602091 /* Question.swift */,
 				BE9AD4ED2CF9AADF00602091 /* User.swift */,
+				BE347AB92D0101850093F711 /* Answer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,7 +262,6 @@
 				BE9AD4EF2CF9AADF00602091 /* UserProfileView.swift */,
 				BE9AD4F02CF9AADF00602091 /* UserProfileViewController.swift */,
 				BE9AD4F92CF9B06100602091 /* EditProfileViewController.swift */,
-				BE9AD4FF2CFA309F00602091 /* UserProfileTestViewController.swift */,
 				BE9AD5012CFA325E00602091 /* EditProfileView.swift */,
 			);
 			path = UserScreen;
@@ -206,6 +290,13 @@
 		CB079A572CF92B7E00D1D22A /* team39_FinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				BE347AAF2D00F7570093F711 /* TabBarManager.swift */,
+				BE347AB02D00F7570093F711 /* Configs.swift */,
+				BE347AB12D00F7570093F711 /* APIConfigs.swift */,
+				BE347AB22D00F7570093F711 /* CountdownManager.swift */,
+				BE347AAD2D00F7390093F711 /* AFHelper.swift */,
+				BE347A912D00F67D0093F711 /* Main Screen */,
+				BE347A8D2D00F6760093F711 /* LeaderBoard Screen */,
 				BE347A862D00D8870093F711 /* ViewController.swift */,
 				BE347A872D00D8870093F711 /* LandingView.swift */,
 				CB079A582CF92B7E00D1D22A /* AppDelegate.swift */,
@@ -221,6 +312,9 @@
 				BE347A732CFB9A730093F711 /* DiscussionScreen */,
 				BE347A7C2D00D87B0093F711 /* Login */,
 				BE347A802D00D87B0093F711 /* Register */,
+				BE347A962D00F6870093F711 /* Answer Screen */,
+				BE347A9F2D00F6900093F711 /* Question Screen */,
+				BE347AA82D00F6E40093F711 /* HomeScreen */,
 			);
 			path = team39_FinalProject;
 			sourceTree = "<group>";
@@ -354,26 +448,44 @@
 			files = (
 				BE9AD4FA2CF9B06100602091 /* EditProfileViewController.swift in Sources */,
 				BE9AD5042CFA4A2100602091 /* FirebaseManager.swift in Sources */,
+				BE347A972D00F6870093F711 /* AnswerView.swift in Sources */,
+				BE347A982D00F6870093F711 /* AnswerViewController.swift in Sources */,
 				CB079A592CF92B7E00D1D22A /* AppDelegate.swift in Sources */,
 				BE347A812D00D87B0093F711 /* RegisterView.swift in Sources */,
+				BE347A8E2D00F6760093F711 /* LeaderBoardViewController.swift in Sources */,
 				BE347A822D00D87B0093F711 /* LoginView.swift in Sources */,
 				BE347A832D00D87B0093F711 /* RegisterFirebaseManager.swift in Sources */,
 				BE347A842D00D87B0093F711 /* LoginViewController.swift in Sources */,
 				BE347A852D00D87B0093F711 /* RegisterViewController.swift in Sources */,
 				BE347A772CFBA57F0093F711 /* AddCommentView.swift in Sources */,
+				BE347ABA2D0101850093F711 /* Answer.swift in Sources */,
 				BE347A792CFBAC0C0093F711 /* CommentManager.swift in Sources */,
 				CB079A5B2CF92B7E00D1D22A /* SceneDelegate.swift in Sources */,
-				BE9AD4F22CF9AADF00602091 /* Question.swift in Sources */,
 				BE9AD4F32CF9AADF00602091 /* ProblemSet.swift in Sources */,
 				BE9AD4F42CF9AADF00602091 /* Discussion.swift in Sources */,
+				BE347AB32D00F7570093F711 /* TabBarManager.swift in Sources */,
+				BE347AB42D00F7570093F711 /* APIConfigs.swift in Sources */,
+				BE347AB52D00F7570093F711 /* Configs.swift in Sources */,
+				BE347AB62D00F7570093F711 /* CountdownManager.swift in Sources */,
 				BE9AD5062CFA547400602091 /* FirebaseTestHelper.swift in Sources */,
+				BE347A922D00F67D0093F711 /* MainScreenViewController.swift in Sources */,
+				BE347AAC2D00F7290093F711 /* Models.swift in Sources */,
+				BE347A932D00F67D0093F711 /* MainScreenView.swift in Sources */,
 				BE347A882D00D8870093F711 /* LandingView.swift in Sources */,
+				BE347AAA2D00F6F20093F711 /* HomeScreenViewController.swift in Sources */,
 				BE347A892D00D8870093F711 /* ViewController.swift in Sources */,
 				BE347A722CFB9A6D0093F711 /* DiscussionViewController.swift in Sources */,
 				BE347A752CFBA5680093F711 /* AddCommentViewController.swift in Sources */,
+				BE347AA02D00F6900093F711 /* QuestionScreenViewController.swift in Sources */,
+				BE347AA12D00F6900093F711 /* QuestionViewController.swift in Sources */,
+				BE347AA22D00F6900093F711 /* QuestionView.swift in Sources */,
+				BE347AA32D00F6900093F711 /* QuestionScreenView.swift in Sources */,
+				BE347AA72D00F6D90093F711 /* HomeScreen.swift in Sources */,
+				BE347AAE2D00F7390093F711 /* AFHelper.swift in Sources */,
+				BE347AA42D00F6900093F711 /* QuestionTableViewManager.swift in Sources */,
+				BE347AA52D00F6900093F711 /* QuestionTableViewCell.swift in Sources */,
 				BE9AD4F52CF9AADF00602091 /* User.swift in Sources */,
 				BE9AD4F62CF9AADF00602091 /* Comment.swift in Sources */,
-				BE9AD5002CFA309F00602091 /* UserProfileTestViewController.swift in Sources */,
 				BE9AD4F72CF9AADF00602091 /* UserProfileView.swift in Sources */,
 				BE9AD5022CFA325E00602091 /* EditProfileView.swift in Sources */,
 				BE347A6F2CFB99E80093F711 /* DiscussionView.swift in Sources */,

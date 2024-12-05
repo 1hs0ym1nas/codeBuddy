@@ -13,21 +13,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        // 创建 UIWindow
-        let window = UIWindow(windowScene: windowScene)
-        
-        // 初始化你的视图控制器
-        let rootViewController = UserProfileViewController()
-        
-        // 嵌套在 UINavigationController 中
-        let navigationController = UINavigationController(rootViewController: rootViewController)
-        
-        // 设置根视图控制器
-        window.rootViewController = navigationController
-        self.window = window
-        window.makeKeyAndVisible()
+        guard let winScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(windowScene: winScene)
+        window?.rootViewController = UINavigationController(rootViewController: ViewController())
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

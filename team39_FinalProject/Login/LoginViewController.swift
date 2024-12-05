@@ -53,8 +53,9 @@ class LoginViewController: UIViewController {
             if let error = error {
                 self?.showAlert(message: error.localizedDescription)
             } else {
+                self?.navigateToHomeScreen()
                 self?.showAlert(message: "Logged in successfully!")
-                self?.checkLoginState()
+                // HomeScreen
             }
         }
     }
@@ -95,5 +96,17 @@ class LoginViewController: UIViewController {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+
+    
+    private func navigateToHomeScreen() {
+        print("Navigating to HomeScreen")  // Debugging output
+        guard let navigationController = self.navigationController else {
+            print("Navigation controller is nil")
+            return
+        }
+        let homeScreenVC = HomeScreenViewController()
+        print("HomeScreenViewController initialized: \(homeScreenVC)")
+        navigationController.pushViewController(homeScreenVC, animated: true)
     }
 }

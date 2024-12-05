@@ -8,16 +8,15 @@
 import UIKit
 
 
-
 class EditProfileViewController: UIViewController {
 
     // MARK: - Properties
-    var username: String = "" // 用于接收用户名
-    var profileImage: UIImage? = nil // 用于接收头像
-    var onSave: ((String, UIImage?) -> Void)? // 保存后的回调
+    var username: String = "" // Used to receive the username
+    var profileImage: UIImage? = nil // Used to receive the profile image
+    var onSave: ((String, UIImage?) -> Void)? // Callback after saving
 
     private let editProfileView = EditProfileView(frame: UIScreen.main.bounds)
-    private var isSaving = false // 防止多次触发保存
+    private var isSaving = false // Prevent multiple save triggers
 
     // MARK: - Lifecycle
     override func loadView() {
@@ -30,12 +29,13 @@ class EditProfileViewController: UIViewController {
     }
 
     // MARK: - Setup View
+    // Set up the view with initial values
     private func setupView() {
-        // 设置初始值
+        // Set initial values
         editProfileView.usernameTextField.text = username
         editProfileView.profileImageView.image = profileImage ?? UIImage(systemName: "person.circle")
 
-        // 设置导航栏保存按钮
+        // Set up the navigation bar save button
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Save",
             style: .plain,
@@ -43,13 +43,14 @@ class EditProfileViewController: UIViewController {
             action: #selector(saveButtonTapped)
         )
 
-        // 添加更换头像按钮的操作
+        // Add action for changing the profile picture button
         //editProfileView.changePhotoButton.addTarget(self, action: #selector(changePhotoTapped), for: .touchUpInside)
     }
 
     // MARK: - Actions
+    // Handle the save button tap
     @objc private func saveButtonTapped() {
-        guard !isSaving else { return } // 防止重复保存
+        guard !isSaving else { return } // Prevent saving multiple times
         isSaving = true
 
         let updatedUsername = editProfileView.usernameTextField.text ?? ""
@@ -57,7 +58,7 @@ class EditProfileViewController: UIViewController {
 
         print("Save button tapped. Updated username: \(updatedUsername)")
 
-        // 检查用户登录状态
+        // Check user login status
         guard let currentUserID = FirebaseManager.shared.getCurrentUserID() else {
             print("User not logged in. Prompting user to log in.")
             isSaving = false
@@ -70,14 +71,14 @@ class EditProfileViewController: UIViewController {
         /*
 
         if let updatedImage = updatedImage {
-            // 上传头像到 Firebase Storage
+            // Upload profile image to Firebase Storage
             FirebaseManager.shared.uploadProfileImage(image: updatedImage) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success(let imageURL):
                     print("Profile image uploaded. URL: \(imageURL)")
 
-                    // 更新用户名和头像 URL 到 Firebase
+                    // Update username and profile image URL to Firebase
                     self.updateUserProfile(username: updatedUsername, profileImageURL: imageURL)
 
                 case .failure(let error):
@@ -86,12 +87,13 @@ class EditProfileViewController: UIViewController {
                 }
             }
         } else {
-            // 如果没有头像更新，仅更新用户名
+            // If no profile image is updated, only update the username
             
         }
          */
     }
 
+    // Update user profile on Firebase
     private func updateUserProfile(username: String, profileImageURL: String?) {
         FirebaseManager.shared.updateUserProfile(username: username, profileImageURL: profileImageURL) { [weak self] result in
             guard let self = self else { return }
@@ -99,7 +101,7 @@ class EditProfileViewController: UIViewController {
             case .success:
                 print("User profile updated successfully.")
 
-                // 执行保存回调
+                // Execute save callback
                 if let onSave = self.onSave {
                     onSave(username, self.editProfileView.profileImageView.image)
                 }
@@ -152,6 +154,7 @@ class EditProfileViewController: UIViewController {
     }
      */
 
+    // Show alert when the user is not logged in
     private func showAlertForLogin() {
         let alert = UIAlertController(title: "Not Logged In", message: "Please log in to save changes.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
