@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		05D323ECF1CA4B6512C53880 /* Pods_team39_FinalProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E22A84CA59530AEB8B561F /* Pods_team39_FinalProject.framework */; };
+		185A49C92D01538200FBC2E0 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185A49C82D01538200FBC2E0 /* LogInViewController.swift */; };
+		185A49CB2D0153C400FBC2E0 /* LogIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185A49CA2D0153C400FBC2E0 /* LogIn.storyboard */; };
 		CB079A592CF92B7E00D1D22A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB079A582CF92B7E00D1D22A /* AppDelegate.swift */; };
 		CB079A5B2CF92B7E00D1D22A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB079A5A2CF92B7E00D1D22A /* SceneDelegate.swift */; };
 		CB079A5D2CF92B7E00D1D22A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB079A5C2CF92B7E00D1D22A /* ViewController.swift */; };
@@ -43,6 +45,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		185A49C82D01538200FBC2E0 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		185A49CA2D0153C400FBC2E0 /* LogIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LogIn.storyboard; sourceTree = "<group>"; };
 		20E22A84CA59530AEB8B561F /* Pods_team39_FinalProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_team39_FinalProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB079A552CF92B7E00D1D22A /* team39_FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = team39_FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB079A582CF92B7E00D1D22A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 				CB5BA8092CFEAD7900130A24 /* Configs.swift */,
 				CB5BA8162CFEB25F00130A24 /* APIConfigs.swift */,
 				CB5BA8182CFEEE6500130A24 /* CountdownManager.swift */,
+				185A49C82D01538200FBC2E0 /* LogInViewController.swift */,
+				185A49CA2D0153C400FBC2E0 /* LogIn.storyboard */,
 			);
 			path = team39_FinalProject;
 			sourceTree = "<group>";
@@ -286,6 +292,7 @@
 				CB079A6D2CF92C7D00D1D22A /* GoogleService-Info.plist in Resources */,
 				CB079A652CF92B8100D1D22A /* Base in Resources */,
 				CB079A602CF92B7E00D1D22A /* Base in Resources */,
+				185A49CB2D0153C400FBC2E0 /* LogIn.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +348,7 @@
 				CB079A982CFD6EEA00D1D22A /* AnswerView.swift in Sources */,
 				CB079A8E2CFD691600D1D22A /* Models.swift in Sources */,
 				CB5BA8112CFEAE3D00130A24 /* ProfileViewController.swift in Sources */,
+				185A49C92D01538200FBC2E0 /* LogInViewController.swift in Sources */,
 				CB5BA8022CFEAB8C00130A24 /* QuestionScreenView.swift in Sources */,
 				CB5BA8132CFEAE4C00130A24 /* DiscussionViewController.swift in Sources */,
 				CB5BA80A2CFEAD7900130A24 /* Configs.swift in Sources */,

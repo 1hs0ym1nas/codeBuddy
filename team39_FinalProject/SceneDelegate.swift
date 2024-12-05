@@ -11,7 +11,39 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
+        guard let winScene = (scene as? UIWindowScene) else { return }
+        
+        // we need to set it to false - for Thanda
+        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+        
+        // Retrieve the 'isLoggedIn' value from UserDefaults
+        let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+        
+        // Initialize the window for the current window scene
+        window = UIWindow(windowScene: winScene)
+        
+        // Check if the user is logged in
+        if isLoggedIn {
+            // Instantiate the main view controller from the "Main" storyboard
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let mainVC = storyboard.instantiateViewController(withIdentifier: "ViewController") as? ViewController {
+                window?.rootViewController = mainVC
+            }
+        } else {
+            // Instantiate the login view controller from the "LogIn" storyboard
+            let storyboard = UIStoryboard(name: "LogIn", bundle: nil)
+            if let logInVC = storyboard.instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController {
+                window?.rootViewController = logInVC
+            }
+        }
+        
+        // Make the window key and visible
+        window?.makeKeyAndVisible()
+    }
+    
+    /* Original version
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -33,6 +65,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = ViewController()
         window?.makeKeyAndVisible()
     }
+     */
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

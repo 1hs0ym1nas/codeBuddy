@@ -4,11 +4,31 @@ import FirebaseAuth
 
 class MainScreenViewController: UIViewController {
     
+    var handleAuth: AuthStateDidChangeListenerHandle?
+    var currentUser:FirebaseAuth.User?
+    var window: UIWindow?
+    
     let mainScreenView = MainScreenView()
     
     override func loadView() {
         view = mainScreenView
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//            super.viewWillAppear(animated)
+//            
+//            //MARK: handling if the Authentication state is changed (sign in, sign out, register)...
+//            handleAuth = Auth.auth().addStateDidChangeListener{ auth, user in
+//                if user == nil{
+//                    self.switchLoggenIn()
+//                    
+//                }else{
+//                    //MARK: the user is signed in...
+//                    self.currentUser = user
+//                    self.mainScreenView.labelWelcome.text = "Welcome \(user?.displayName ?? "Anonymous")!"
+//                }
+//            }
+//        }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,9 +57,13 @@ class MainScreenViewController: UIViewController {
         logoutAlert.addAction(UIAlertAction(title: "Yes, log out!", style: .default, handler: {(_) in
                 do{
                     try Auth.auth().signOut()
+                    UserDefaults.standard.set(false, forKey: "isLoggedIn")
+                    self.switchLoggenIn()
+                    
                 }catch{
                     print("Error occured!")
                 }
+            
             })
         )
         logoutAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -50,7 +74,7 @@ class MainScreenViewController: UIViewController {
     @objc func onHButton1Tappped(){
         // creating a new user on Firebase
         let questionViewController = QuestionScreenViewController()
-        questionViewController.title = "Array & String"
+        questionViewController.title = "Array"
         questionViewController.passUrl = APIConfigs.baseURL + APIConfigs.button1Tag
         self.navigationController?.pushViewController(questionViewController, animated: true)
     }
@@ -59,14 +83,14 @@ class MainScreenViewController: UIViewController {
         // creating a new user on Firebase
         let questionViewController = QuestionScreenViewController()
         questionViewController.passUrl = APIConfigs.baseURL + APIConfigs.button2Tag
-        questionViewController.title = "Sliding Window & Two Pointers"
+        questionViewController.title = "String"
         self.navigationController?.pushViewController(questionViewController, animated: true)
     }
     
     @objc func onHButton3Tappped(){
         // creating a new user on Firebase
         let questionViewController = QuestionScreenViewController()
-        questionViewController.title = "Tree & Recursion"
+        questionViewController.title = "Sliding window"
         questionViewController.passUrl = APIConfigs.baseURL + APIConfigs.button3Tag
         self.navigationController?.pushViewController(questionViewController, animated: true)
     }
@@ -74,7 +98,7 @@ class MainScreenViewController: UIViewController {
     @objc func onHButton4Tappped(){
         // creating a new user on Firebase
         let questionViewController = QuestionScreenViewController()
-        questionViewController.title = "Math & Hash Table"
+        questionViewController.title = "Two pointer"
         questionViewController.passUrl = APIConfigs.baseURL + APIConfigs.button4Tag
         self.navigationController?.pushViewController(questionViewController, animated: true)
     }
@@ -82,10 +106,33 @@ class MainScreenViewController: UIViewController {
     @objc func onHButton5Tappped(){
         // creating a new user on Firebase
         let questionViewController = QuestionScreenViewController()
-        questionViewController.title = "Stack & Queue"
+        questionViewController.title = "Tree"
         questionViewController.passUrl = APIConfigs.baseURL + APIConfigs.button5Tag
         self.navigationController?.pushViewController(questionViewController, animated: true)
     }
+    
+    // need to be changed to log in story board name
+    func switchLoggenIn() {
+        let logInStoryBoard = UIStoryboard(name: "LogIn", bundle: nil)
+        if let logInVC = logInStoryBoard.instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+            window = UIWindow(windowScene: windowScene)
+            window?.rootViewController = logInVC
+            window?.makeKeyAndVisible()
+        }
+    }
+    
+    /* modilied this when logged in
+    func switchMainApp() {
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+        if let mainVC = mainStoryBoard.instantiateViewController(withIdentifier: "MainScreenViewController") as? MainScreenViewController {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+            window = UIWindow(windowScene: windowScene)
+            window?.rootViewController = mainVC
+            window?.makeKeyAndVisible()
+        }
+    }
+     */
 
 
 }

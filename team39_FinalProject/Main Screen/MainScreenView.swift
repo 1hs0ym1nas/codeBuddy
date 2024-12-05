@@ -23,7 +23,7 @@ class MainScreenView: UIView {
         setupLabelRecommendForYouList()
         setupbutton3()
         setupbutton4()
-        setupButton5()
+        setupbutton5()
         initConstraints()
     }
     
@@ -46,92 +46,113 @@ class MainScreenView: UIView {
     
     func setupbutton1(){
         button1 = UIButton(type: .system)
-        // Create the original image
-        var image = UIImage(systemName: "1.circle")?.withRenderingMode(.alwaysOriginal)
-            
-        // Resize the image by applying a larger symbol configuration
-        let config = UIImage.SymbolConfiguration(pointSize: 100, weight: .regular, scale: .large)
-        image = image?.withConfiguration(config)
-
-        // Create a button configuration
-        var buttonConfig = UIButton.Configuration.filled()
-            
-        // Set the image and title for the button
-        buttonConfig.image = image
-        buttonConfig.title = "Array & String"
-            
-        // Set the layout of the image and title
-        buttonConfig.imagePlacement = .top       // Places the image at the top
-        buttonConfig.imagePadding = 20            // Space between image and title
-        buttonConfig.titlePadding = 8            // Optional: adds padding around the title
-            
-        // Set the button background color to white
-        buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
-        buttonConfig.background.backgroundColor = .white  // Set the background color to white
         
-        // Set the title color using attributedTitle
-        buttonConfig.attributedTitle = AttributedString("Array & String", attributes: .init([.foregroundColor: UIColor.black]))
-        
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 100, weight: .regular, scale: .large).applying(UIImage.SymbolConfiguration(weight: .regular))
-        let blackImage = UIImage(systemName: "1.circle")?.withConfiguration(imageConfig).withTintColor(.black, renderingMode: .alwaysOriginal)
-
-        buttonConfig.image = blackImage
-         
-        // Apply the configuration to the button
-        button1.configuration = buttonConfig
+        // Use the custom image from your asset catalog's "Image" folder
+        if let image = UIImage(named: "array") {
             
-        // Customize the title font (if needed)
-        button1.titleLabel?.font = .boldSystemFont(ofSize: 20)
+            // Resize the image to a specific size (e.g., 60x60)
+            let resizedImage = resizeImage(image: image, targetSize: CGSize(width: 140, height: 140))
             
-        // Ensure the content is centered
-        button1.contentHorizontalAlignment = .center
-        button1.contentVerticalAlignment = .center
+            // Create a button configuration
+            var buttonConfig = UIButton.Configuration.filled()
 
-        button1.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(button1)
+            // Set the resized image and title for the button
+            buttonConfig.image = resizedImage
+            buttonConfig.title = "Array"
+            
+            // Set the layout of the image and title
+            buttonConfig.imagePlacement = .top       // Places the image at the top
+            buttonConfig.imagePadding = 10            // Space between image and title
+            buttonConfig.titlePadding = 8            // Padding around the title
+            
+            // Set the button background color to white
+            buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
+            buttonConfig.background.backgroundColor = .white  // Set the background color to white
+            
+            // Set the title color using attributedTitle
+            buttonConfig.attributedTitle = AttributedString("Array", attributes: .init([.foregroundColor: UIColor.black]))
+
+            // Apply the configuration to the button
+            button1.configuration = buttonConfig
+            
+            // Customize the title font (if needed)
+            button1.titleLabel?.font = .boldSystemFont(ofSize: 20)
+            
+            // Ensure the content is centered
+            button1.contentHorizontalAlignment = .center
+            button1.contentVerticalAlignment = .center
+
+            button1.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview(button1)
+            
+        } else {
+            print("Image 'array' not found in 'Image' folder in asset catalog.")
+        }
+    }
+
+    // Helper function to resize the image to a target size
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
         
+        // Determine the scale factor to preserve aspect ratio
+        let scaleFactor = min(widthRatio, heightRatio)
+        let newSize = CGSize(width: size.width * scaleFactor, height: size.height * scaleFactor)
+        
+        // Create a new image with the resized size
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        image.draw(in: CGRect(origin: .zero, size: newSize))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return resizedImage ?? image
     }
     
     func setupbutton2(){
         button2 = UIButton(type: .system)
-        // Create the original image
-        var image = UIImage(systemName: "2.circle")?.withRenderingMode(.alwaysOriginal)
+        
+        // Use the custom image from your asset catalog's "Image" folder
+        if let image = UIImage(named: "string") {
             
-        // Resize the image by applying a larger symbol configuration
-        let config = UIImage.SymbolConfiguration(pointSize: 100, weight: .regular, scale: .large)
-        image = image?.withConfiguration(config)
+            // Resize the image to a specific size (e.g., 60x60)
+            let resizedImage = resizeImage(image: image, targetSize: CGSize(width: 140, height: 140))
+            
+            // Create a button configuration
+            var buttonConfig = UIButton.Configuration.filled()
 
-        // Create a button configuration
-        var buttonConfig = UIButton.Configuration.filled()
+            // Set the resized image and title for the button
+            buttonConfig.image = resizedImage
+            buttonConfig.title = "String"
             
-        // Set the image and title for the button
-        buttonConfig.image = image
-        buttonConfig.title = "Sliding windows & Two pointers"
+            // Set the layout of the image and title
+            buttonConfig.imagePlacement = .top       // Places the image at the top
+            buttonConfig.imagePadding = 10            // Space between image and title
+            buttonConfig.titlePadding = 8            // Padding around the title
             
-        // Set the layout of the image and title
-        buttonConfig.imagePlacement = .top       // Places the image at the top
-        buttonConfig.imagePadding = 20            // Space between image and title
-        buttonConfig.titlePadding = 8            // Optional: adds padding around the title
+            // Set the button background color to white
+            buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
+            buttonConfig.background.backgroundColor = .white  // Set the background color to white
             
-        // Set the button background color to white
-        buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
-        buttonConfig.background.backgroundColor = .white  // Set the background color to white
-        
-        // Set the title color using attributedTitle
-        buttonConfig.attributedTitle = AttributedString("Sliding windows & Two pointers", attributes: .init([.foregroundColor: UIColor.black]))
-        
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 100, weight: .regular, scale: .large).applying(UIImage.SymbolConfiguration(weight: .regular))
-        let blackImage = UIImage(systemName: "2.circle")?.withConfiguration(imageConfig).withTintColor(.black, renderingMode: .alwaysOriginal)
+            // Set the title color using attributedTitle
+            buttonConfig.attributedTitle = AttributedString("String", attributes: .init([.foregroundColor: UIColor.black]))
 
-        buttonConfig.image = blackImage
-         
-        // Apply the configuration to the button
-        button2.configuration = buttonConfig
-        
-        button2.titleLabel?.font = .boldSystemFont(ofSize: 20)
-        button2.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(button2)
-        
+            // Apply the configuration to the button
+            button2.configuration = buttonConfig
+            
+            // Customize the title font (if needed)
+            button2.titleLabel?.font = .boldSystemFont(ofSize: 20)
+            
+            // Ensure the content is centered
+            button2.contentHorizontalAlignment = .center
+            button2.contentVerticalAlignment = .center
+
+            button2.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview(button2)
+            
+        } else {
+            print("Image 'array' not found in 'Image' folder in asset catalog.")
+        }
     }
     
     func setupLabelRecommendForYouList(){
@@ -145,144 +166,139 @@ class MainScreenView: UIView {
     
     func setupbutton3(){
         button3 = UIButton(type: .system)
-        // Create the original image
-        var image = UIImage(systemName: "3.circle")?.withRenderingMode(.alwaysOriginal)
+        
+        // Use the custom image from your asset catalog's "Image" folder
+        if let image = UIImage(named: "sliding_window") {
             
-        // Resize the image by applying a larger symbol configuration
-        let config = UIImage.SymbolConfiguration(pointSize: 55, weight: .regular, scale: .large)
-        image = image?.withConfiguration(config)
+            // Resize the image to a specific size (e.g., 60x60)
+            let resizedImage = resizeImage(image: image, targetSize: CGSize(width: 120, height: 120))
+            
+            // Create a button configuration
+            var buttonConfig = UIButton.Configuration.filled()
 
-        // Create a button configuration
-        var buttonConfig = UIButton.Configuration.filled()
+            // Set the resized image and title for the button
+            buttonConfig.image = resizedImage
+            buttonConfig.title = "Sliding window"
             
-        // Set the image and title for the button
-        buttonConfig.image = image
-        buttonConfig.title = "Tree & Recursion"
+            // Set the layout of the image and title
+            buttonConfig.imagePlacement = .top       // Places the image at the top
+            buttonConfig.imagePadding = 10            // Space between image and title
+            buttonConfig.titlePadding = 8            // Padding around the title
             
-        // Set the layout of the image and title
-        buttonConfig.imagePlacement = .top       // Places the image at the top
-        buttonConfig.imagePadding = 20            // Space between image and title
-        buttonConfig.titlePadding = 8            // Optional: adds padding around the title
+            // Set the button background color to white
+            buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
+            buttonConfig.background.backgroundColor = .white  // Set the background color to white
             
-        // Set the button background color to white
-        buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
-        buttonConfig.background.backgroundColor = .white  // Set the background color to white
-        
-        // Set the title color using attributedTitle
-        buttonConfig.attributedTitle = AttributedString("Tree & Recursion", attributes: .init([.foregroundColor: UIColor.black]))
-        
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 55, weight: .regular, scale: .large).applying(UIImage.SymbolConfiguration(weight: .regular))
-        let blackImage = UIImage(systemName: "3.circle")?.withConfiguration(imageConfig).withTintColor(.black, renderingMode: .alwaysOriginal)
+            // Set the title color using attributedTitle
+            buttonConfig.attributedTitle = AttributedString("Sliding window", attributes: .init([.foregroundColor: UIColor.black]))
 
-        buttonConfig.image = blackImage
-         
-        // Apply the configuration to the button
-        button3.configuration = buttonConfig
+            // Apply the configuration to the button
+            button3.configuration = buttonConfig
             
-        // Customize the title font (if needed)
-        button3.titleLabel?.font = .boldSystemFont(ofSize: 20)
+            // Customize the title font (if needed)
+            button3.titleLabel?.font = .boldSystemFont(ofSize: 20)
             
-        // Ensure the content is centered
-        button3.contentHorizontalAlignment = .center
-        button3.contentVerticalAlignment = .center
-        button3.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(button3)
-        
+            // Ensure the content is centered
+            button3.contentHorizontalAlignment = .center
+            button3.contentVerticalAlignment = .center
+
+            button3.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview(button3)
+            
+        } else {
+            print("Image 'array' not found in 'Image' folder in asset catalog.")
+        }
     }
     
     func setupbutton4(){
         button4 = UIButton(type: .system)
-        // Create the original image
-        var image = UIImage(systemName: "4.circle")?.withRenderingMode(.alwaysOriginal)
+        
+        // Use the custom image from your asset catalog's "Image" folder
+        if let image = UIImage(named: "two_pointer") {
             
-        // Resize the image by applying a larger symbol configuration
-        let config = UIImage.SymbolConfiguration(pointSize: 50, weight: .regular, scale: .large)
-        image = image?.withConfiguration(config)
+            // Resize the image to a specific size (e.g., 60x60)
+            let resizedImage = resizeImage(image: image, targetSize: CGSize(width: 120, height: 120))
+            
+            // Create a button configuration
+            var buttonConfig = UIButton.Configuration.filled()
 
-        // Create a button configuration
-        var buttonConfig = UIButton.Configuration.filled()
+            // Set the resized image and title for the button
+            buttonConfig.image = resizedImage
+            buttonConfig.title = "Two pointer"
             
-        // Set the image and title for the button
-        buttonConfig.image = image
-        buttonConfig.title = "Math & Hash table"
+            // Set the layout of the image and title
+            buttonConfig.imagePlacement = .top       // Places the image at the top
+            buttonConfig.imagePadding = 10            // Space between image and title
+            buttonConfig.titlePadding = 8            // Padding around the title
             
-        // Set the layout of the image and title
-        buttonConfig.imagePlacement = .top       // Places the image at the top
-        buttonConfig.imagePadding = 20            // Space between image and title
-        buttonConfig.titlePadding = 8            // Optional: adds padding around the title
+            // Set the button background color to white
+            buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
+            buttonConfig.background.backgroundColor = .white  // Set the background color to white
             
-        // Set the button background color to white
-        buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
-        buttonConfig.background.backgroundColor = .white  // Set the background color to white
-        
-        // Set the title color using attributedTitle
-        buttonConfig.attributedTitle = AttributedString("Math & Hash table", attributes: .init([.foregroundColor: UIColor.black]))
-        
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 50, weight: .regular, scale: .large).applying(UIImage.SymbolConfiguration(weight: .regular))
-        let blackImage = UIImage(systemName: "4.circle")?.withConfiguration(imageConfig).withTintColor(.black, renderingMode: .alwaysOriginal)
+            // Set the title color using attributedTitle
+            buttonConfig.attributedTitle = AttributedString("Two pointer", attributes: .init([.foregroundColor: UIColor.black]))
 
-        buttonConfig.image = blackImage
-         
-        // Apply the configuration to the button
-        button4.configuration = buttonConfig
+            // Apply the configuration to the button
+            button4.configuration = buttonConfig
             
-        // Customize the title font (if needed)
-        button4.titleLabel?.font = .boldSystemFont(ofSize: 20)
+            // Customize the title font (if needed)
+            button4.titleLabel?.font = .boldSystemFont(ofSize: 20)
             
-        // Ensure the content is centered
-        button4.contentHorizontalAlignment = .center
-        button4.contentVerticalAlignment = .center
-        button4.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(button4)
-        
+            // Ensure the content is centered
+            button4.contentHorizontalAlignment = .center
+            button4.contentVerticalAlignment = .center
+
+            button4.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview(button4)
+            
+        } else {
+            print("Image 'array' not found in 'Image' folder in asset catalog.")
+        }
     }
-    
-    func setupButton5(){
+    func setupbutton5(){
         button5 = UIButton(type: .system)
-        // Create the original image
-        var image = UIImage(systemName: "5.circle")?.withRenderingMode(.alwaysOriginal)
-            
-        // Resize the image by applying a larger symbol configuration
-        let config = UIImage.SymbolConfiguration(pointSize: 50, weight: .regular, scale: .large)
-        image = image?.withConfiguration(config)
-
-        // Create a button configuration
-        var buttonConfig = UIButton.Configuration.filled()
-            
-        // Set the image and title for the button
-        buttonConfig.image = image
-        buttonConfig.title = "Stack & Queue"
-            
-        // Set the layout of the image and title
-        buttonConfig.imagePlacement = .top       // Places the image at the top
-        buttonConfig.imagePadding = 20            // Space between image and title
-        buttonConfig.titlePadding = 8            // Optional: adds padding around the title
-            
-        // Set the button background color to white
-        buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
-        buttonConfig.background.backgroundColor = .white  // Set the background color to white
         
-        // Set the title color using attributedTitle
-        buttonConfig.attributedTitle = AttributedString("Stack & Queue", attributes: .init([.foregroundColor: UIColor.black]))
-        
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 50, weight: .regular, scale: .large).applying(UIImage.SymbolConfiguration(weight: .regular))
-        let blackImage = UIImage(systemName: "5.circle")?.withConfiguration(imageConfig).withTintColor(.black, renderingMode: .alwaysOriginal)
-
-        buttonConfig.image = blackImage
-         
-        // Apply the configuration to the button
-        button5.configuration = buttonConfig
+        // Use the custom image from your asset catalog's "Image" folder
+        if let image = UIImage(named: "tree") {
             
-        // Customize the title font (if needed)
-        button5.titleLabel?.font = .boldSystemFont(ofSize: 20)
+            // Resize the image to a specific size (e.g., 60x60)
+            let resizedImage = resizeImage(image: image, targetSize: CGSize(width: 120, height: 120))
             
-        // Ensure the content is centered
-        button5.contentHorizontalAlignment = .center
-        button5.contentVerticalAlignment = .center
+            // Create a button configuration
+            var buttonConfig = UIButton.Configuration.filled()
 
-        button5.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(button5)
-        
+            // Set the resized image and title for the button
+            buttonConfig.image = resizedImage
+            buttonConfig.title = "Tree"
+            
+            // Set the layout of the image and title
+            buttonConfig.imagePlacement = .top       // Places the image at the top
+            buttonConfig.imagePadding = 10            // Space between image and title
+            buttonConfig.titlePadding = 8            // Padding around the title
+            
+            // Set the button background color to white
+            buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
+            buttonConfig.background.backgroundColor = .white  // Set the background color to white
+            
+            // Set the title color using attributedTitle
+            buttonConfig.attributedTitle = AttributedString("Tree", attributes: .init([.foregroundColor: UIColor.black]))
+
+            // Apply the configuration to the button
+            button5.configuration = buttonConfig
+            
+            // Customize the title font (if needed)
+            button5.titleLabel?.font = .boldSystemFont(ofSize: 20)
+            
+            // Ensure the content is centered
+            button5.contentHorizontalAlignment = .center
+            button5.contentVerticalAlignment = .center
+
+            button5.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview(button5)
+            
+        } else {
+            print("Image 'array' not found in 'Image' folder in asset catalog.")
+        }
     }
     
     func initConstraints(){
