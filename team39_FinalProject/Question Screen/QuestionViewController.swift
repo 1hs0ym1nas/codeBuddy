@@ -39,9 +39,12 @@ class QuestionViewController: UIViewController {
                     self?.setTimerBasedOnDifficulty(question.difficulty)
                     self?.displayQuestionData(question)
                     self?.questionView.updateTitle(self?.formatTitleSlug(question.titleSlug) ?? question.titleSlug)
-//                    self?.questionView.updateTitle(question.titleSlug)
                 case .failure(let error):
-                    self?.showErrorAlert(message: error.localizedDescription)
+                    if let networkError = error as? NetworkError, networkError == .premiumQuestion {
+                        self?.showPremiumQuestionAlert(titleSlug: self?.titleSlug ?? "")
+                    } else {
+                        self?.showErrorAlert(message: error.localizedDescription)
+                    }
                 }
             }
         }
@@ -62,15 +65,13 @@ class QuestionViewController: UIViewController {
         startCountdown()
     }
 
-
     private func formatTitleSlug(_ slug: String) -> String {
         return slug.split(separator: "-").map { $0.capitalized }.joined(separator: " ")
     }
-    
+
     private func displayQuestionData(_ question: Question) {
         if let data = question.description.data(using: .utf8) {
             do {
-
                 let attributedString = try NSMutableAttributedString(
                     data: data,
                     options: [.documentType: NSAttributedString.DocumentType.html],
@@ -85,7 +86,6 @@ class QuestionViewController: UIViewController {
                 mutableParagraphStyle.paragraphSpacingBefore = 0
                 mutableParagraphStyle.alignment = .left
 
-            
                 let fullRange = NSRange(location: 0, length: attributedString.length)
                 attributedString.addAttributes([
                     .font: UIFont.systemFont(ofSize: 18),
@@ -94,7 +94,6 @@ class QuestionViewController: UIViewController {
 
                 questionView.descriptionTextView.attributedText = attributedString
             } catch {
- 
                 questionView.descriptionTextView.text = question.description
                 questionView.descriptionTextView.font = UIFont.systemFont(ofSize: 18)
             }
@@ -103,7 +102,6 @@ class QuestionViewController: UIViewController {
             questionView.descriptionTextView.font = UIFont.systemFont(ofSize: 18)
         }
     }
-
 
     private func startCountdown() {
         timer?.invalidate()
@@ -139,8 +137,24 @@ class QuestionViewController: UIViewController {
         present(alert, animated: true)
     }
 
-    @objc private func didTapBack() {
-        navigationController?.popViewController(animated: true)
+    private func showPremiumQuestionAlert(titleSlug: String) {
+        let alert = UIAlertController(
+            title: "❕This is a Premium Question",
+            message: "We are sorry, this question is not visible since it is a premium question on LeetCode.com. Press 'View on LeetCode' to check details there.",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }))
+
+        alert.addAction(UIAlertAction(title: "View on LeetCode", style: .default, handler: { _ in
+            if let url = URL(string: "https://leetcode.com/problems/\(titleSlug)") {
+                UIApplication.shared.open(url)
+            }
+        }))
+
+        present(alert, animated: true)
     }
 
     @objc private func didTapStart() {
