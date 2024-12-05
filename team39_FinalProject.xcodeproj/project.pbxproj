@@ -233,6 +233,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				CB5BA8232D01653B00130A24 /* PBXTargetDependency */,
+				CB5BA8212D01653400130A24 /* PBXTargetDependency */,
+				CB5BA81F2D01652F00130A24 /* PBXTargetDependency */,
+				CB5BA81D2D01652600130A24 /* PBXTargetDependency */,
+				CB5BA81B2D01651E00130A24 /* PBXTargetDependency */,
 			);
 			name = team39_FinalProject;
 			packageProductDependencies = (
@@ -356,6 +361,29 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CB5BA81B2D01651E00130A24 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = CB5BA81A2D01651E00130A24 /* FirebaseCore */;
+		};
+		CB5BA81D2D01652600130A24 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = CB5BA81C2D01652600130A24 /* FirebaseFirestore */;
+		};
+		CB5BA81F2D01652F00130A24 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = CB5BA81E2D01652F00130A24 /* Alamofire */;
+		};
+		CB5BA8212D01653400130A24 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = CB5BA8202D01653400130A24 /* FirebaseAuth */;
+		};
+		CB5BA8232D01653B00130A24 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = CB5BA8222D01653B00130A24 /* FirebaseStorage */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CB079A5E2CF92B7E00D1D22A /* Main.storyboard */ = {
@@ -621,6 +649,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CB079A8A2CFD51FC00D1D22A /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		CB5BA81A2D01651E00130A24 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB079A7C2CFD4E8E00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		CB5BA81C2D01652600130A24 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB079A7C2CFD4E8E00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		CB5BA81E2D01652F00130A24 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB079A8A2CFD51FC00D1D22A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		CB5BA8202D01653400130A24 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB079A7C2CFD4E8E00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		CB5BA8222D01653B00130A24 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB079A7C2CFD4E8E00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
