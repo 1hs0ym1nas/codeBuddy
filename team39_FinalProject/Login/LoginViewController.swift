@@ -7,7 +7,9 @@
 
 import UIKit
 import FirebaseAuth
+import Firebase
 import FBSDKLoginKit
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
     private let loginView = LoginView()
@@ -25,6 +27,7 @@ class LoginViewController: UIViewController {
     private func setupActions() {
         loginView.signInButton.addTarget(self, action: #selector(onSignInTapped), for: .touchUpInside)
         loginView.facebookButton.addTarget(self, action: #selector(onFacebookSignInTapped), for: .touchUpInside)
+        loginView.googleButton.addTarget(self, action: #selector(onGoogleSignInTapped), for: .touchUpInside)
         
         // Handle navigation to Sign Up
         loginView.onSignUpTapped = { [weak self] in
@@ -107,6 +110,45 @@ class LoginViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
+    
+    @objc private func onGoogleSignInTapped() {
+        // Ensure the Firebase client ID is available
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+
+        // Create a Google Sign-In configuration object
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+
+        // Present the Google Sign-In flow
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { result, error in
+            if let error = error {
+                self.showAlert(message: "Google Sign-In failed: \(error.localizedDescription)")
+                return
+            }
+
+            // Retrieve authentication tokens
+            guard let user = result?.user,
+              let idToken = user.idToken?.tokenString else {
+                self.showAlert(message: "Unable to retrieve Google authentication token.")
+                return
+            }
+
+            // Create Firebase credential
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
+
+            // Sign in with Firebase
+            Auth.auth().signIn(with: credential) { authResult, error in
+                if let error = error {
+                    self.showAlert(message: "Firebase sign-in failed: \(error.localizedDescription)")
+                } else {
+                    // Navigate to the next screen on success
+                    let leaderboardVC = LeaderboardViewController()
+                    self.navigationController?.pushViewController(leaderboardVC, animated: true)
+                }
+            }
+        }
+    }
+
     
     @objc private func onFacebookSignInTapped() {
         let loginManager = LoginManager()

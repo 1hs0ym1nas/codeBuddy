@@ -8,6 +8,8 @@
 import UIKit
 import FirebaseCore
 import FBSDKCoreKit
+import FirebaseAuth
+import GoogleSignIn
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,10 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    // MARK: - Facebook Login Callback Handling
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    // MARK: - Handle URL Callbacks for Facebook and Google Sign-In
+    func application(_ app: UIApplication, open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         // Handle Facebook Login callback
-        return ApplicationDelegate.shared.application(app, open: url, options: options)
+        if ApplicationDelegate.shared.application(app, open: url, options: options) {
+            return true
+        }
+        
+        // Handle Google Sign-In callback
+        return GIDSignIn.sharedInstance.handle(url)
     }
 
     // MARK: UISceneSession Lifecycle
@@ -37,3 +45,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Handle discarded scene sessions
     }
 }
+

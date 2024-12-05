@@ -35,10 +35,18 @@
     <string>bcca19bead9ec8b9d2fffb3062e62b97</string>
     <key>CFBundleURLTypes</key>
     <array>
+        <!-- Facebook URL Scheme -->
         <dict>
             <key>CFBundleURLSchemes</key>
             <array>
                 <string>fb1727640047809472</string>
+            </array>
+        </dict>
+        <!-- Google Sign-In URL Scheme -->
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.658212367340-j42bq2n2ffv38vn08hkqf45ksr7js5oj</string>
             </array>
         </dict>
     </array>
@@ -48,6 +56,8 @@
         <string>fb-messenger-share-api</string>
         <string>fbauth2</string>
         <string>fbshareextension</string>
+        <string>googlechrome</string>
+        <string>comgooglemaps</string>
     </array>
 </dict>
 </plist>
