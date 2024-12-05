@@ -50,6 +50,9 @@ class MainScreenViewController: UIViewController {
         mainScreenView.button3.addTarget(self, action: #selector(onHButton3Tappped), for: .touchUpInside)
         mainScreenView.button4.addTarget(self, action: #selector(onHButton4Tappped), for: .touchUpInside)
         mainScreenView.button5.addTarget(self, action: #selector(onHButton5Tappped), for: .touchUpInside)
+        mainScreenView.button6.addTarget(self, action: #selector(onHButton3Tappped), for: .touchUpInside)
+        mainScreenView.button7.addTarget(self, action: #selector(onHButton4Tappped), for: .touchUpInside)
+        mainScreenView.button8.addTarget(self, action: #selector(onHButton5Tappped), for: .touchUpInside)
     }
     @objc func onLogOutBarButtonTapped(){
         let logoutAlert = UIAlertController(title: "Logging out!", message: "Are you sure want to log out?",
@@ -108,6 +111,30 @@ class MainScreenViewController: UIViewController {
         let questionViewController = QuestionScreenViewController()
         questionViewController.title = "Tree"
         questionViewController.passUrl = APIConfigs.baseURL + APIConfigs.button5Tag
+        self.navigationController?.pushViewController(questionViewController, animated: true)
+    }
+    
+    @objc func onHButton6Tappped(){
+        // creating a new user on Firebase
+        let questionViewController = QuestionScreenViewController()
+        questionViewController.title = "Graph"
+        questionViewController.passUrl = APIConfigs.baseURL + APIConfigs.button6Tag
+        self.navigationController?.pushViewController(questionViewController, animated: true)
+    }
+    
+    @objc func onHButton7Tappped(){
+        // creating a new user on Firebase
+        let questionViewController = QuestionScreenViewController()
+        questionViewController.title = "Stack"
+        questionViewController.passUrl = APIConfigs.baseURL + APIConfigs.button7Tag
+        self.navigationController?.pushViewController(questionViewController, animated: true)
+    }
+    
+    @objc func onHButton8Tappped(){
+        // creating a new user on Firebase
+        let questionViewController = QuestionScreenViewController()
+        questionViewController.title = "Queue"
+        questionViewController.passUrl = APIConfigs.baseURL + APIConfigs.button8Tag
         self.navigationController?.pushViewController(questionViewController, animated: true)
     }
     
