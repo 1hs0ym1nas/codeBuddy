@@ -11,6 +11,7 @@
 		1E508BA12D01096200E7BC65 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E508BA02D01096200E7BC65 /* LeaderboardViewController.swift */; };
 		1E508BA52D010A9B00E7BC65 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E508BA42D010A9B00E7BC65 /* LeaderboardView.swift */; };
 		1E508BA92D0116C000E7BC65 /* LeaderboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E508BA82D0116C000E7BC65 /* LeaderboardCell.swift */; };
+		1E508BAC2D012E1C00E7BC65 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 1E508BAB2D012E1C00E7BC65 /* FacebookLogin */; };
 		1EB58D062D00008000EC1F25 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB58D052D00008000EC1F25 /* RegisterView.swift */; };
 		1EB58D082D00037100EC1F25 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB58D072D00037100EC1F25 /* RegisterViewController.swift */; };
 		1EB58D0A2D00049500EC1F25 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB58D092D00049500EC1F25 /* LoginView.swift */; };
@@ -65,6 +66,7 @@
 				CB079A802CFD4E8E00D1D22A /* FirebaseCore in Frameworks */,
 				CB079A8C2CFD51FC00D1D22A /* Alamofire in Frameworks */,
 				CB079A842CFD4E8E00D1D22A /* FirebaseStorage in Frameworks */,
+				1E508BAC2D012E1C00E7BC65 /* FacebookLogin in Frameworks */,
 				CB079A7E2CFD4E8E00D1D22A /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,6 +180,7 @@
 				CB079A812CFD4E8E00D1D22A /* FirebaseFirestore */,
 				CB079A832CFD4E8E00D1D22A /* FirebaseStorage */,
 				CB079A8B2CFD51FC00D1D22A /* Alamofire */,
+				1E508BAB2D012E1C00E7BC65 /* FacebookLogin */,
 			);
 			productName = team39_FinalProject;
 			productReference = CB079A552CF92B7E00D1D22A /* team39_FinalProject.app */;
@@ -210,6 +213,7 @@
 			packageReferences = (
 				CB079A7C2CFD4E8E00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				CB079A8A2CFD51FC00D1D22A /* XCRemoteSwiftPackageReference "Alamofire" */,
+				1E508BAA2D012E1B00E7BC65 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = CB079A562CF92B7E00D1D22A /* Products */;
 			projectDirPath = "";
@@ -502,6 +506,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1E508BAA2D012E1B00E7BC65 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.1.0;
+			};
+		};
 		CB079A7C2CFD4E8E00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -521,6 +533,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1E508BAB2D012E1C00E7BC65 /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E508BAA2D012E1B00E7BC65 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
 		CB079A7D2CFD4E8E00D1D22A /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CB079A7C2CFD4E8E00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     private let loginView = LoginView()
@@ -23,6 +24,7 @@ class LoginViewController: UIViewController {
 
     private func setupActions() {
         loginView.signInButton.addTarget(self, action: #selector(onSignInTapped), for: .touchUpInside)
+        loginView.facebookButton.addTarget(self, action: #selector(onFacebookSignInTapped), for: .touchUpInside)
         
         // Handle navigation to Sign Up
         loginView.onSignUpTapped = { [weak self] in
@@ -105,4 +107,38 @@ class LoginViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
+    
+    @objc private func onFacebookSignInTapped() {
+        let loginManager = LoginManager()
+        loginManager.logIn(permissions: ["public_profile", "email"], from: self) { [weak self] result, error in
+            if let error = error {
+                self?.showAlert(message: "Facebook login failed: \(error.localizedDescription)")
+                return
+            }
+
+            guard let result = result, !result.isCancelled else {
+                self?.showAlert(message: "Facebook login cancelled.")
+                return
+            }
+
+            // Get Facebook credential
+            guard let tokenString = AccessToken.current?.tokenString else {
+                self?.showAlert(message: "Failed to retrieve Facebook access token.")
+                return
+            }
+            let credential = FacebookAuthProvider.credential(withAccessToken: tokenString)
+
+            // Sign in with Firebase
+            Auth.auth().signIn(with: credential) { authResult, error in
+                if let error = error {
+                    self?.showAlert(message: "Firebase sign in failed: \(error.localizedDescription)")
+                } else {
+                    // Navigate to Leaderboard on successful login
+                    let leaderboardVC = LeaderboardViewController()
+                    self?.navigationController?.pushViewController(leaderboardVC, animated: true)
+                }
+            }
+        }
+    }
+
 }
