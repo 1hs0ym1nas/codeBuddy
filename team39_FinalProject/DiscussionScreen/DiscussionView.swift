@@ -67,11 +67,8 @@ class DiscussionView: UIView {
     
     // MARK: - Setup View
     private func setupView() {
-        // Make sure the background is clear so that the gradient can be seen
-        backgroundColor = .clear
-        
-        // Add the gradient background
-        addGradientBackground()
+        // Make sure the background is clear
+        backgroundColor = .white
         
         // Add subviews
         addSubview(titleLabel)
@@ -82,19 +79,6 @@ class DiscussionView: UIView {
         
         // Setup constraints
         setupConstraints()
-    }
-    
-    // MARK: - Add Gradient Background
-    private func addGradientBackground() {
-        // Define the gradient layer
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [
-            UIColor.systemBlue.withAlphaComponent(0.2).cgColor,  // Light blue
-            UIColor.systemBlue.withAlphaComponent(0.6).cgColor   // Slightly darker blue
-        ]
-        gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.frame = bounds
-        layer.insertSublayer(gradientLayer, at: 0)
     }
     
     private func setupConstraints() {
