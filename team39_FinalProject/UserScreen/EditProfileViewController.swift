@@ -5,7 +5,10 @@
 //  Created by yan ran on 2024/11/29.
 //
 
-import UIKit
+import Firebase
+import FirebaseFirestore
+import FirebaseAuth
+import FirebaseStorage
 
 class EditProfileViewController: UIViewController {
 
@@ -65,7 +68,11 @@ class EditProfileViewController: UIViewController {
             return
         }
         
+        // Update user profile (username)
         updateUserProfile(username: updatedUsername, profileImageURL: nil)
+
+        // Update all comments with the new username
+        updateCommentsUsername(newUsername: updatedUsername)
         
         /*
 
@@ -110,6 +117,31 @@ class EditProfileViewController: UIViewController {
                 print("Failed to update user profile: \(error.localizedDescription)")
             }
             self.isSaving = false
+        }
+    }
+    
+    // Update all comments with the new username
+    private func updateCommentsUsername(newUsername: String) {
+        // Fetch all comments related to the user
+        let db = Firestore.firestore()
+        db.collection("comments").whereField("userID", isEqualTo: FirebaseManager.shared.getCurrentUserID() ?? "").getDocuments { snapshot, error in
+            if let error = error {
+                print("Error fetching comments: \(error.localizedDescription)")
+                return
+            }
+
+            // Update each comment's username
+            snapshot?.documents.forEach { document in
+                db.collection("comments").document(document.documentID).updateData([
+                    "userName": newUsername
+                ]) { error in
+                    if let error = error {
+                        print("Error updating comment username: \(error.localizedDescription)")
+                    } else {
+                        print("Comment username updated successfully.")
+                    }
+                }
+            }
         }
     }
     
