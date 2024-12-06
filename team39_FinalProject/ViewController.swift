@@ -38,7 +38,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
         tabProfile.title = "Profile"
         
         //MARK: setting up blue tab bar...
-        let tabLeaderBoard = UINavigationController(rootViewController: LeaderBoardViewController())
+        let tabLeaderBoard = UINavigationController(rootViewController: LeaderboardViewController())
         let tabLeaderBoardBarItem = UITabBarItem(
             title: "LeaderBoard",
             image: UIImage(systemName: "star")?.withRenderingMode(.alwaysOriginal),

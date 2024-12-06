@@ -16,6 +16,12 @@
 		185629592D023EF10014C1C9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185629552D023EF10014C1C9 /* LoginView.swift */; };
 		185A49C92D01538200FBC2E0 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185A49C82D01538200FBC2E0 /* LogInViewController.swift */; };
 		185A49CB2D0153C400FBC2E0 /* LogIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185A49CA2D0153C400FBC2E0 /* LogIn.storyboard */; };
+		1E508BCA2D02797400E7BC65 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 1E508BC92D02797400E7BC65 /* GoogleSignIn */; };
+		1E508BCC2D02797400E7BC65 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1E508BCB2D02797400E7BC65 /* GoogleSignInSwift */; };
+		1E508BCE2D027A4E00E7BC65 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E508BCD2D027A4E00E7BC65 /* LeaderboardView.swift */; };
+		1E508BD02D027A6000E7BC65 /* LeaderboardEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E508BCF2D027A6000E7BC65 /* LeaderboardEntry.swift */; };
+		1E508BD22D027A6D00E7BC65 /* LeaderboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E508BD12D027A6D00E7BC65 /* LeaderboardCell.swift */; };
+		1E508BD52D027E8500E7BC65 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 1E508BD42D027E8500E7BC65 /* FacebookLogin */; };
 		CB079A592CF92B7E00D1D22A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB079A582CF92B7E00D1D22A /* AppDelegate.swift */; };
 		CB079A5B2CF92B7E00D1D22A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB079A5A2CF92B7E00D1D22A /* SceneDelegate.swift */; };
 		CB079A5D2CF92B7E00D1D22A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB079A5C2CF92B7E00D1D22A /* ViewController.swift */; };
@@ -42,7 +48,7 @@
 		CB5BA8062CFEABF900130A24 /* QuestionTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5BA8052CFEABF900130A24 /* QuestionTableViewManager.swift */; };
 		CB5BA8082CFEAC8200130A24 /* QuestionScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5BA8072CFEAC8200130A24 /* QuestionScreenViewController.swift */; };
 		CB5BA80A2CFEAD7900130A24 /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5BA8092CFEAD7900130A24 /* Configs.swift */; };
-		CB5BA80F2CFEAE3100130A24 /* LeaderBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5BA80E2CFEAE3100130A24 /* LeaderBoardViewController.swift */; };
+		CB5BA80F2CFEAE3100130A24 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5BA80E2CFEAE3100130A24 /* LeaderboardViewController.swift */; };
 		CB5BA8112CFEAE3D00130A24 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5BA8102CFEAE3D00130A24 /* ProfileViewController.swift */; };
 		CB5BA8132CFEAE4C00130A24 /* DiscussionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5BA8122CFEAE4C00130A24 /* DiscussionViewController.swift */; };
 		CB5BA8172CFEB25F00130A24 /* APIConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5BA8162CFEB25F00130A24 /* APIConfigs.swift */; };
@@ -58,6 +64,9 @@
 		185629562D023EF10014C1C9 /* LoginViewControllerMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerMain.swift; sourceTree = "<group>"; };
 		185A49C82D01538200FBC2E0 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		185A49CA2D0153C400FBC2E0 /* LogIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LogIn.storyboard; sourceTree = "<group>"; };
+		1E508BCD2D027A4E00E7BC65 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
+		1E508BCF2D027A6000E7BC65 /* LeaderboardEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardEntry.swift; sourceTree = "<group>"; };
+		1E508BD12D027A6D00E7BC65 /* LeaderboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardCell.swift; sourceTree = "<group>"; };
 		20E22A84CA59530AEB8B561F /* Pods_team39_FinalProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_team39_FinalProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB079A552CF92B7E00D1D22A /* team39_FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = team39_FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB079A582CF92B7E00D1D22A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,7 +91,7 @@
 		CB5BA8052CFEABF900130A24 /* QuestionTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTableViewManager.swift; sourceTree = "<group>"; };
 		CB5BA8072CFEAC8200130A24 /* QuestionScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionScreenViewController.swift; sourceTree = "<group>"; };
 		CB5BA8092CFEAD7900130A24 /* Configs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configs.swift; sourceTree = "<group>"; };
-		CB5BA80E2CFEAE3100130A24 /* LeaderBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardViewController.swift; sourceTree = "<group>"; };
+		CB5BA80E2CFEAE3100130A24 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
 		CB5BA8102CFEAE3D00130A24 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CB5BA8122CFEAE4C00130A24 /* DiscussionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionViewController.swift; sourceTree = "<group>"; };
 		CB5BA8162CFEB25F00130A24 /* APIConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigs.swift; sourceTree = "<group>"; };
@@ -99,9 +108,12 @@
 				05D323ECF1CA4B6512C53880 /* Pods_team39_FinalProject.framework in Frameworks */,
 				CB079A822CFD4E8E00D1D22A /* FirebaseFirestore in Frameworks */,
 				CB079A802CFD4E8E00D1D22A /* FirebaseCore in Frameworks */,
+				1E508BCC2D02797400E7BC65 /* GoogleSignInSwift in Frameworks */,
 				CB079A8C2CFD51FC00D1D22A /* Alamofire in Frameworks */,
+				1E508BD52D027E8500E7BC65 /* FacebookLogin in Frameworks */,
 				CB079A842CFD4E8E00D1D22A /* FirebaseStorage in Frameworks */,
 				CB079A7E2CFD4E8E00D1D22A /* FirebaseAuth in Frameworks */,
+				1E508BCA2D02797400E7BC65 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,7 +256,10 @@
 		CB5BA80D2CFEAE1800130A24 /* LeaderBoard Screen */ = {
 			isa = PBXGroup;
 			children = (
-				CB5BA80E2CFEAE3100130A24 /* LeaderBoardViewController.swift */,
+				CB5BA80E2CFEAE3100130A24 /* LeaderboardViewController.swift */,
+				1E508BCD2D027A4E00E7BC65 /* LeaderboardView.swift */,
+				1E508BCF2D027A6000E7BC65 /* LeaderboardEntry.swift */,
+				1E508BD12D027A6D00E7BC65 /* LeaderboardCell.swift */,
 			);
 			path = "LeaderBoard Screen";
 			sourceTree = "<group>";
@@ -277,6 +292,9 @@
 				CB079A812CFD4E8E00D1D22A /* FirebaseFirestore */,
 				CB079A832CFD4E8E00D1D22A /* FirebaseStorage */,
 				CB079A8B2CFD51FC00D1D22A /* Alamofire */,
+				1E508BC92D02797400E7BC65 /* GoogleSignIn */,
+				1E508BCB2D02797400E7BC65 /* GoogleSignInSwift */,
+				1E508BD42D027E8500E7BC65 /* FacebookLogin */,
 			);
 			productName = team39_FinalProject;
 			productReference = CB079A552CF92B7E00D1D22A /* team39_FinalProject.app */;
@@ -309,6 +327,8 @@
 			packageReferences = (
 				CB079A7C2CFD4E8E00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				CB079A8A2CFD51FC00D1D22A /* XCRemoteSwiftPackageReference "Alamofire" */,
+				1E508BC82D02797400E7BC65 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				1E508BD32D027E8500E7BC65 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = CB079A562CF92B7E00D1D22A /* Products */;
 			projectDirPath = "";
@@ -366,14 +386,17 @@
 			files = (
 				CB079A5D2CF92B7E00D1D22A /* ViewController.swift in Sources */,
 				CB5BA8192CFEEE6500130A24 /* CountdownManager.swift in Sources */,
+				1E508BD02D027A6000E7BC65 /* LeaderboardEntry.swift in Sources */,
 				CB5BA8042CFEABC200130A24 /* QuestionTableViewCell.swift in Sources */,
 				CB5BA7FE2CFEAA5F00130A24 /* MainScreenViewController.swift in Sources */,
+				1E508BD22D027A6D00E7BC65 /* LeaderboardCell.swift in Sources */,
 				CB079A902CFD6C1800D1D22A /* AFHelper.swift in Sources */,
 				CB079A932CFD6E3200D1D22A /* QuestionViewController.swift in Sources */,
 				CB079A9A2CFD6EF500D1D22A /* AnswerViewController.swift in Sources */,
 				CB5BA8082CFEAC8200130A24 /* QuestionScreenViewController.swift in Sources */,
 				CB079A952CFD6E3E00D1D22A /* QuestionView.swift in Sources */,
 				CB079A592CF92B7E00D1D22A /* AppDelegate.swift in Sources */,
+				1E508BCE2D027A4E00E7BC65 /* LeaderboardView.swift in Sources */,
 				CB079A9C2CFD77AB00D1D22A /* HomeScreen.swift in Sources */,
 				CB5BA7FC2CFEAA5300130A24 /* MainScreenView.swift in Sources */,
 				CB5BA8062CFEABF900130A24 /* QuestionTableViewManager.swift in Sources */,
@@ -382,7 +405,7 @@
 				185629542D023EE60014C1C9 /* RegisterViewController.swift in Sources */,
 				CB079A5B2CF92B7E00D1D22A /* SceneDelegate.swift in Sources */,
 				1856294D2D023E890014C1C9 /* LandingView.swift in Sources */,
-				CB5BA80F2CFEAE3100130A24 /* LeaderBoardViewController.swift in Sources */,
+				CB5BA80F2CFEAE3100130A24 /* LeaderboardViewController.swift in Sources */,
 				CB5BA8172CFEB25F00130A24 /* APIConfigs.swift in Sources */,
 				CB079A982CFD6EEA00D1D22A /* AnswerView.swift in Sources */,
 				CB079A8E2CFD691600D1D22A /* Models.swift in Sources */,
@@ -642,6 +665,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1E508BC82D02797400E7BC65 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+		1E508BD32D027E8500E7BC65 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.1.0;
+			};
+		};
 		CB079A7C2CFD4E8E00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -661,6 +700,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1E508BC92D02797400E7BC65 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E508BC82D02797400E7BC65 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		1E508BCB2D02797400E7BC65 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E508BC82D02797400E7BC65 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		1E508BD42D027E8500E7BC65 /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E508BD32D027E8500E7BC65 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
 		CB079A7D2CFD4E8E00D1D22A /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CB079A7C2CFD4E8E00D1D22A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

@@ -8,8 +8,8 @@
 import UIKit
 import FirebaseAuth
 import Firebase
-//import FBSDKLoginKit
-//import GoogleSignIn
+import FBSDKLoginKit
+import GoogleSignIn
 
 class LoginViewControllerMain: UIViewController {
     
@@ -125,7 +125,6 @@ class LoginViewControllerMain: UIViewController {
     }
     
     @objc private func onGoogleSignInTapped() {
-        /*
         // Ensure the Firebase client ID is available
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
 
@@ -161,12 +160,10 @@ class LoginViewControllerMain: UIViewController {
                 }
             }
         }
-         */
     }
 
     
     @objc private func onFacebookSignInTapped() {
-        /*
         let loginManager = LoginManager()
         loginManager.logIn(permissions: ["public_profile", "email"], from: self) { [weak self] result, error in
             if let error = error {
@@ -197,7 +194,6 @@ class LoginViewControllerMain: UIViewController {
                 }
             }
         }
-         */
     }
 
 }
