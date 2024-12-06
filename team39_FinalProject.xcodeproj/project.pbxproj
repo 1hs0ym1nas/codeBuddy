@@ -22,6 +22,7 @@
 		1E508BD02D027A6000E7BC65 /* LeaderboardEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E508BCF2D027A6000E7BC65 /* LeaderboardEntry.swift */; };
 		1E508BD22D027A6D00E7BC65 /* LeaderboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E508BD12D027A6D00E7BC65 /* LeaderboardCell.swift */; };
 		1E508BD52D027E8500E7BC65 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 1E508BD42D027E8500E7BC65 /* FacebookLogin */; };
+		1E617BC02D02BD56009ABCEF /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E617BBF2D02BD56009ABCEF /* CommentManager.swift */; };
 		BE32432A2D028A8C0082FF21 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3243252D028A8C0082FF21 /* UserProfileView.swift */; };
 		BE32432B2D028A8C0082FF21 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3243272D028A8C0082FF21 /* EditProfileViewController.swift */; };
 		BE32432C2D028A8C0082FF21 /* FirebaseTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3243232D028A8C0082FF21 /* FirebaseTestHelper.swift */; };
@@ -29,7 +30,6 @@
 		BE32432E2D028A8C0082FF21 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3243282D028A8C0082FF21 /* EditProfileView.swift */; };
 		BE32432F2D028A8C0082FF21 /* DiscussionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32431D2D028A8C0082FF21 /* DiscussionViewController.swift */; };
 		BE3243302D028A8C0082FF21 /* DiscussionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32431C2D028A8C0082FF21 /* DiscussionView.swift */; };
-		BE3243312D028A8C0082FF21 /* CommentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3243212D028A8C0082FF21 /* CommentManager.swift */; };
 		BE3243322D028A8C0082FF21 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3243222D028A8C0082FF21 /* FirebaseManager.swift */; };
 		BE3243332D028A8C0082FF21 /* AddCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32431F2D028A8C0082FF21 /* AddCommentView.swift */; };
 		BE3243342D028A8C0082FF21 /* AddCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32431E2D028A8C0082FF21 /* AddCommentViewController.swift */; };
@@ -80,12 +80,12 @@
 		1E508BCD2D027A4E00E7BC65 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		1E508BCF2D027A6000E7BC65 /* LeaderboardEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardEntry.swift; sourceTree = "<group>"; };
 		1E508BD12D027A6D00E7BC65 /* LeaderboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardCell.swift; sourceTree = "<group>"; };
+		1E617BBF2D02BD56009ABCEF /* CommentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentManager.swift; sourceTree = "<group>"; };
 		20E22A84CA59530AEB8B561F /* Pods_team39_FinalProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_team39_FinalProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE32431C2D028A8C0082FF21 /* DiscussionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionView.swift; sourceTree = "<group>"; };
 		BE32431D2D028A8C0082FF21 /* DiscussionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionViewController.swift; sourceTree = "<group>"; };
 		BE32431E2D028A8C0082FF21 /* AddCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentViewController.swift; sourceTree = "<group>"; };
 		BE32431F2D028A8C0082FF21 /* AddCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentView.swift; sourceTree = "<group>"; };
-		BE3243212D028A8C0082FF21 /* CommentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommentManager.swift; path = "../../Desktop/5520/codeBuddy-main/team39_FinalProject/CommentManager.swift"; sourceTree = SOURCE_ROOT; };
 		BE3243222D028A8C0082FF21 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		BE3243232D028A8C0082FF21 /* FirebaseTestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTestHelper.swift; sourceTree = "<group>"; };
 		BE3243252D028A8C0082FF21 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
@@ -196,9 +196,9 @@
 		BE3243242D028A8C0082FF21 /* FirebaseHelper */ = {
 			isa = PBXGroup;
 			children = (
-				BE3243212D028A8C0082FF21 /* CommentManager.swift */,
 				BE3243222D028A8C0082FF21 /* FirebaseManager.swift */,
 				BE3243232D028A8C0082FF21 /* FirebaseTestHelper.swift */,
+				1E617BBF2D02BD56009ABCEF /* CommentManager.swift */,
 			);
 			path = FirebaseHelper;
 			sourceTree = "<group>";
@@ -447,6 +447,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E617BC02D02BD56009ABCEF /* CommentManager.swift in Sources */,
 				CB079A5D2CF92B7E00D1D22A /* ViewController.swift in Sources */,
 				CB5BA8192CFEEE6500130A24 /* CountdownManager.swift in Sources */,
 				1E508BD02D027A6000E7BC65 /* LeaderboardEntry.swift in Sources */,
@@ -473,7 +474,6 @@
 				BE32432E2D028A8C0082FF21 /* EditProfileView.swift in Sources */,
 				BE32432F2D028A8C0082FF21 /* DiscussionViewController.swift in Sources */,
 				BE3243302D028A8C0082FF21 /* DiscussionView.swift in Sources */,
-				BE3243312D028A8C0082FF21 /* CommentManager.swift in Sources */,
 				BE3243322D028A8C0082FF21 /* FirebaseManager.swift in Sources */,
 				BE3243332D028A8C0082FF21 /* AddCommentView.swift in Sources */,
 				BE3243342D028A8C0082FF21 /* AddCommentViewController.swift in Sources */,

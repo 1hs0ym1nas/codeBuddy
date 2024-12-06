@@ -85,7 +85,7 @@ class DiscussionView: UIView {
             commentsTableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 16),
             commentsTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             commentsTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            commentsTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            commentsTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             
             // Add Button Constraints
             addButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),

@@ -7,10 +7,11 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 
 class LeaderboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private let leaderboardView = LeaderboardView()
-    private var users: [(name: String, score: Int)] = [] // Leaderboard data from Firestore
+    private var users: [User] = [] // Leaderboard data from Firestore as User objects
 
     override func loadView() {
         view = leaderboardView
@@ -19,7 +20,12 @@ class LeaderboardViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        fetchLeaderboardData()
+        fetchLeaderboardData() // Initial data fetch
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        fetchLeaderboardData() // Refresh data every time the view appears
     }
 
     private func setupTableView() {
@@ -35,23 +41,21 @@ class LeaderboardViewController: UIViewController, UITableViewDataSource, UITabl
         // Access the "users" collection and query for leaderboard data
         db.collection("users")
             .order(by: "score", descending: true) // Order by score in descending order
-            .limit(to: 3) // Fetch top 10 users
+            .limit(to: 3) // Fetch top 3 users
             .getDocuments { [weak self] (querySnapshot, error) in
                 if let error = error {
                     print("Error fetching leaderboard data: \(error.localizedDescription)")
                     return
                 }
 
-                // Clear existing users
-                self?.users.removeAll()
+                guard let documents = querySnapshot?.documents else {
+                    print("No leaderboard data found")
+                    return
+                }
 
-                // Parse Firestore documents
-                for document in querySnapshot?.documents ?? [] {
-                    let data = document.data()
-                    if let username = data["username"] as? String,
-                       let score = data["score"] as? Int {
-                        self?.users.append((name: username, score: score))
-                    }
+                // Decode Firestore documents into User objects
+                self?.users = documents.compactMap { document in
+                    try? document.data(as: User.self) // Decode directly to User model
                 }
 
                 // Reload the table view on the main thread
@@ -72,7 +76,7 @@ class LeaderboardViewController: UIViewController, UITableViewDataSource, UITabl
         }
 
         let user = users[indexPath.row]
-        cell.configure(rank: indexPath.row + 1, name: user.name, score: user.score)
+        cell.configure(rank: indexPath.row + 1, name: user.userName, score: user.score)
         return cell
     }
 

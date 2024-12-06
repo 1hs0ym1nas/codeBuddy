@@ -61,7 +61,6 @@ class LoginViewControllerMain: UIViewController {
             if let error = error {
                 self?.showAlert(message: error.localizedDescription)
             } else {
-                // Show the success alert and navigate to Leaderboard on dismiss
                 let alert = UIAlertController(
                     title: "Success",
                     message: "Logged in successfully!",
@@ -127,36 +126,43 @@ class LoginViewControllerMain: UIViewController {
     @objc private func onGoogleSignInTapped() {
         // Ensure the Firebase client ID is available
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-
+        
         // Create a Google Sign-In configuration object
         let config = GIDConfiguration(clientID: clientID)
         GIDSignIn.sharedInstance.configuration = config
-
+        
         // Present the Google Sign-In flow
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { result, error in
             if let error = error {
                 self.showAlert(message: "Google Sign-In failed: \(error.localizedDescription)")
                 return
             }
-
+            
             // Retrieve authentication tokens
             guard let user = result?.user,
-              let idToken = user.idToken?.tokenString else {
+                  let idToken = user.idToken?.tokenString else {
                 self.showAlert(message: "Unable to retrieve Google authentication token.")
                 return
             }
-
+            
             // Create Firebase credential
             let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
-
+            
             // Sign in with Firebase
             Auth.auth().signIn(with: credential) { authResult, error in
                 if let error = error {
                     self.showAlert(message: "Firebase sign-in failed: \(error.localizedDescription)")
                 } else {
-                    // Navigate to the next screen on success
-                    let leaderboardVC = LeaderboardViewController()
-                    self.navigationController?.pushViewController(leaderboardVC, animated: true)
+                    let alert = UIAlertController(
+                        title: "Success",
+                        message: "Logged in successfully!",
+                        preferredStyle: .alert
+                    )
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                        self.switchMainApp()
+                    }))
+                    self.present(alert, animated: true)
                 }
             }
         }
@@ -188,9 +194,16 @@ class LoginViewControllerMain: UIViewController {
                 if let error = error {
                     self?.showAlert(message: "Firebase sign in failed: \(error.localizedDescription)")
                 } else {
-                    // Navigate to Leaderboard on successful login
-                    let leaderboardVC = LeaderboardViewController()
-                    self?.navigationController?.pushViewController(leaderboardVC, animated: true)
+                    let alert = UIAlertController(
+                        title: "Success",
+                        message: "Logged in successfully!",
+                        preferredStyle: .alert
+                    )
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                        self?.switchMainApp()
+                    }))
+                    self?.present(alert, animated: true)
                 }
             }
         }
