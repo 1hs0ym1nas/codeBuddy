@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 class LeaderboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private let leaderboardView = LeaderboardView()
-    private var users: [User] = [] // Leaderboard data from Firestore as User objects
+    private var leaderboardEntries: [LeaderboardEntry] = []
 
     override func loadView() {
         view = leaderboardView
@@ -20,12 +20,12 @@ class LeaderboardViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        fetchLeaderboardData() // Initial data fetch
+        fetchLeaderboardData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        fetchLeaderboardData() // Refresh data every time the view appears
+        fetchLeaderboardData()
     }
 
     private func setupTableView() {
@@ -38,51 +38,64 @@ class LeaderboardViewController: UIViewController, UITableViewDataSource, UITabl
     private func fetchLeaderboardData() {
         let db = Firestore.firestore()
         
-        // Access the "users" collection and query for leaderboard data
         db.collection("users")
-            .order(by: "score", descending: true) // Order by score in descending order
-            .limit(to: 3) // Fetch top 3 users
+            .order(by: "score", descending: true)
+            .limit(to: 10)
             .getDocuments { [weak self] (querySnapshot, error) in
                 if let error = error {
                     print("Error fetching leaderboard data: \(error.localizedDescription)")
                     return
                 }
-
+                
                 guard let documents = querySnapshot?.documents else {
                     print("No leaderboard data found")
                     return
                 }
+                
+                var entries: [LeaderboardEntry] = []
+                var lastScore: Int? = nil
+                var currentRank = 0
+                var actualRank = 0
+                
+                for document in documents {
+                    if let user = try? document.data(as: User.self) {
+                        actualRank += 1
 
-                // Decode Firestore documents into User objects
-                self?.users = documents.compactMap { document in
-                    try? document.data(as: User.self) // Decode directly to User model
+                        if user.score != lastScore {
+                            currentRank = actualRank
+                            lastScore = user.score
+                        }
+                        
+                        entries.append(LeaderboardEntry(username: user.userName, score: user.score, rank: currentRank))
+                    }
                 }
-
-                // Reload the table view on the main thread
+                
+                self?.leaderboardEntries = entries
                 DispatchQueue.main.async {
                     self?.leaderboardView.leaderboardTableView.reloadData()
                 }
             }
     }
 
+
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return leaderboardEntries.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "LeaderboardCell", for: indexPath) as? LeaderboardCell else {
             return UITableViewCell()
         }
-
-        let user = users[indexPath.row]
-        cell.configure(rank: indexPath.row + 1, name: user.userName, score: user.score)
+        
+        let entry = leaderboardEntries[indexPath.row]
+        cell.configure(rank: entry.rank, name: entry.username, score: entry.score)
         return cell
     }
 
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100 // Adjust cell height
+        return 100
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -98,10 +111,10 @@ class LeaderboardViewController: UIViewController, UITableViewDataSource, UITabl
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10 // Space between cells
+        return 10
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10 // Space between cells
+        return 10
     }
 }
