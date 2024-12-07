@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import FirebaseAuth
+import Firebase
 
 extension QuestionScreenViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -10,8 +11,14 @@ extension QuestionScreenViewController: UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Configs.tableViewQuestion, for: indexPath) as! QuestionTableViewCell
+        //let question = questionList[indexPath.row]
         let question = filteredList[indexPath.row]
-        cell.configure(with: question)
+        let currentUserId = currentUser?.uid ?? "guest_user"
+        checkIfQuestionIsCompleted(questionId: question.questionFrontendId, userId: currentUserId) { isCompleted in
+                    cell.configure(with: question, isCompleted: isCompleted)
+                }
+        
+        //cell.configure(with:question)
         return cell
     }
 
@@ -54,6 +61,21 @@ extension QuestionScreenViewController: UITableViewDelegate, UITableViewDataSour
         let loginViewController = LoginViewController()
         self.navigationController?.pushViewController(loginViewController, animated: true)
          */
+    }
+    
+    func checkIfQuestionIsCompleted(questionId: String, userId: String, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        let userAnswersRef = db.collection("answers").document(userId).collection("userAnswers").document(questionId)
+
+        userAnswersRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                // Assuming the document contains a 'completed' field
+                let isCompleted = document.get("isCompleted") as? Bool ?? false
+                completion(isCompleted)
+            } else {
+                completion(false)
+            }
+        }
     }
 }
 
