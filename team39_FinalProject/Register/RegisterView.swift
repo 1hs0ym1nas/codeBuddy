@@ -10,7 +10,7 @@ import UIKit
 import UIKit
 
 class RegisterView: UIView {
-    var onSignInTapped: (() -> Void)? // Callback for "Sign In Here"
+    var onSignInTapped: (() -> Void)?
 
     private let titleLabel: UILabel = {
         let label = UILabel()

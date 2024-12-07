@@ -46,15 +46,19 @@ class RegisterViewController: UIViewController {
     }
     
     @objc private func onRegisterTapped() {
-        registerNewAccount()
-
-        let alert = UIAlertController(
-            title: "Success",
-            message: "Registered successfully! Please log in.",
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        
-        present(alert, animated: true, completion: nil)
+        registerNewAccount { isSuccess in
+            if isSuccess {
+                // Show success alert only on successful registration
+                let alert = UIAlertController(
+                    title: "Success",
+                    message: "Registered successfully! Please log in.",
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
     }
+
 }
