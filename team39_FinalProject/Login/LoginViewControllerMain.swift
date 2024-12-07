@@ -59,7 +59,7 @@ class LoginViewControllerMain: UIViewController {
         
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
             if let error = error {
-                self?.showAlert(message: error.localizedDescription)
+                self?.showAlert(message: "Incorrect Password or User Not Found. Please check your log in credentials and try again.")
             } else {
                 let alert = UIAlertController(
                     title: "Success",
