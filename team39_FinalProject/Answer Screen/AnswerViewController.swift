@@ -113,6 +113,7 @@ class AnswerViewController: UIViewController, SFSpeechRecognizerDelegate {
     @objc private func didTapMarkCompleted() {
         guard let existingAnswer = user.answers[questionID], existingAnswer.isCompleted else {
             saveAnswer(isCompleted: true)
+            NotificationCenter.default.post(name: .questionCompleted, object: nil)
             return
         }
 

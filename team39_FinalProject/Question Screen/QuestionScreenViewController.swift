@@ -1,11 +1,14 @@
 import UIKit
 import Alamofire
+import FirebaseAuth
+import Firebase
 
 class QuestionScreenViewController: UIViewController {
     var passUrl:String!
     let questionScreenView = QuestionScreenView()
     var questionList = [QuestionListItem]()
     var filteredList = [QuestionListItem]()
+    let currentUser = Auth.auth().currentUser
 
     override func loadView() {
         view = questionScreenView
@@ -36,8 +39,33 @@ class QuestionScreenViewController: UIViewController {
         questionScreenView.textFieldSearch.addTarget(self, action: #selector(searchTextChanged), for: .editingChanged)
         
         setupTableView()
+        // Add observer for the question completion notification
+        NotificationCenter.default.addObserver(self, selector: #selector(handleQuestionCompletedNotification(_:)), name: .questionCompleted, object: nil)
         print("Filtered List: \(filteredList)")
     
+    }
+    
+    deinit {
+            // Always remove the observer when it's no longer needed
+        NotificationCenter.default.removeObserver(self, name: .questionCompleted, object: nil)
+        }
+    @objc func handleQuestionCompletedNotification(_ notification: Notification) {
+        // Clear both questionList and filteredList
+        questionList.removeAll()
+        filteredList.removeAll()
+            
+        // Call getAllQuestions to reload the data
+        getAllQuestions()
+            
+        // Reload the table view to reflect the changes
+        self.questionScreenView.tableViewQuestions.reloadData()
+    }
+    // Get the current user ID from Firebase Auth
+    func getCurrentUserId() -> String {
+        guard let currentUser = Auth.auth().currentUser else {
+            return "guest_user" // Default fallback for unauthenticated users
+        }
+        return currentUser.uid
     }
     
     @objc func searchTextChanged() {

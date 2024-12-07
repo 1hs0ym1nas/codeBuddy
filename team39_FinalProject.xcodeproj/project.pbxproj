@@ -16,6 +16,7 @@
 		185629592D023EF10014C1C9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185629552D023EF10014C1C9 /* LoginView.swift */; };
 		185A49C92D01538200FBC2E0 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185A49C82D01538200FBC2E0 /* LogInViewController.swift */; };
 		185A49CB2D0153C400FBC2E0 /* LogIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185A49CA2D0153C400FBC2E0 /* LogIn.storyboard */; };
+		18D0F88B2D03D21C0097A09F /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D0F88A2D03D21C0097A09F /* NotificationNames.swift */; };
 		1E508BCA2D02797400E7BC65 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 1E508BC92D02797400E7BC65 /* GoogleSignIn */; };
 		1E508BCC2D02797400E7BC65 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1E508BCB2D02797400E7BC65 /* GoogleSignInSwift */; };
 		1E508BCE2D027A4E00E7BC65 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E508BCD2D027A4E00E7BC65 /* LeaderboardView.swift */; };
@@ -77,6 +78,7 @@
 		185629562D023EF10014C1C9 /* LoginViewControllerMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerMain.swift; sourceTree = "<group>"; };
 		185A49C82D01538200FBC2E0 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		185A49CA2D0153C400FBC2E0 /* LogIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LogIn.storyboard; sourceTree = "<group>"; };
+		18D0F88A2D03D21C0097A09F /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		1E508BCD2D027A4E00E7BC65 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		1E508BCF2D027A6000E7BC65 /* LeaderboardEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardEntry.swift; sourceTree = "<group>"; };
 		1E508BD12D027A6D00E7BC65 /* LeaderboardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardCell.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 		CB079A572CF92B7E00D1D22A /* team39_FinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				18D0F88A2D03D21C0097A09F /* NotificationNames.swift */,
 				BE3243202D028A8C0082FF21 /* DiscussionScreen */,
 				BE3243242D028A8C0082FF21 /* FirebaseHelper */,
 				BE3243292D028A8C0082FF21 /* UserScreen */,
@@ -476,6 +479,7 @@
 				BE3243302D028A8C0082FF21 /* DiscussionView.swift in Sources */,
 				BE3243322D028A8C0082FF21 /* FirebaseManager.swift in Sources */,
 				BE3243332D028A8C0082FF21 /* AddCommentView.swift in Sources */,
+				18D0F88B2D03D21C0097A09F /* NotificationNames.swift in Sources */,
 				BE3243342D028A8C0082FF21 /* AddCommentViewController.swift in Sources */,
 				CB5BA8062CFEABF900130A24 /* QuestionTableViewManager.swift in Sources */,
 				185629522D023EE60014C1C9 /* RegisterFirebaseManager.swift in Sources */,

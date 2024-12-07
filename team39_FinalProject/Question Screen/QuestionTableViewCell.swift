@@ -7,6 +7,7 @@ class QuestionTableViewCell: UITableViewCell {
     var labelDifficulty: UILabel!
     var starStackView: UIStackView!
     var labelTime: UILabel!
+    var labelCompletionStatus: UIImageView!  // Change to UIImageView for displaying an image
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -16,10 +17,18 @@ class QuestionTableViewCell: UITableViewCell {
         setupLabelDifficulty()
         setupStarStackView()
         setupLabelTime()
+        setupLabelCompletionStatus()  // Setup the new label
         
         initConstraints()
         
     }
+    
+    func setupLabelCompletionStatus() {
+        labelCompletionStatus = UIImageView()
+        labelCompletionStatus.contentMode = .scaleAspectFit
+        labelCompletionStatus.translatesAutoresizingMaskIntoConstraints = false
+        wrapperCellView.addSubview(labelCompletionStatus)
+        }
     
     func setupWrapperCellView(){
         wrapperCellView = UITableViewCell()
@@ -90,6 +99,11 @@ class QuestionTableViewCell: UITableViewCell {
             labelDifficulty.trailingAnchor.constraint(equalTo: wrapperCellView.trailingAnchor, constant: -16),
             labelDifficulty.centerYAnchor.constraint(equalTo: labelTitle.centerYAnchor),
             
+            labelCompletionStatus.leadingAnchor.constraint(equalTo: labelTitle.leadingAnchor, constant: 16),
+            labelCompletionStatus.widthAnchor.constraint(equalToConstant: 16),  // Fixed size for the icon
+            labelCompletionStatus.heightAnchor.constraint(equalToConstant: 16), // Fixed size for the icon
+            labelCompletionStatus.centerYAnchor.constraint(equalTo: starStackView.centerYAnchor),
+            
             starStackView.trailingAnchor.constraint(equalTo: labelTime.leadingAnchor, constant:-8),
             starStackView.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 8),
             starStackView.heightAnchor.constraint(equalToConstant: 16),
@@ -102,13 +116,22 @@ class QuestionTableViewCell: UITableViewCell {
         ])
     }
     
-    func configure(with question:QuestionListItem){
+    func configure(with question:QuestionListItem, isCompleted: Bool){
         labelTitle.text = question.questionFrontendId + ". " + question.title
         labelDifficulty.text = question.difficulty
         
         let info = question.difficultyInfo
         configureStar(count: info.starCount)
         labelTime.text = info.time
+        
+        if isCompleted {
+            labelCompletionStatus.image = UIImage(systemName: "checkmark.seal.fill")
+            labelCompletionStatus.tintColor = .systemGreen  // Green for completed
+            }
+        else {
+            labelCompletionStatus.image = UIImage(systemName: "checkmark.seal.fill")
+            labelCompletionStatus.tintColor = .systemGray  // Green for completed
+            }
         
     }
     
