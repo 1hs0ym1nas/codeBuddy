@@ -1,3 +1,4 @@
+
 import UIKit
 
 class MainScreenView: UIView {
@@ -19,6 +20,8 @@ class MainScreenView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .white
         
+        // Add gradient background
+        setupGradientBackground()
         setupLabelWelcome()
         setupLabelPopularStudyList()
         setupbutton1()
@@ -32,6 +35,28 @@ class MainScreenView: UIView {
         setupbutton8()
         initConstraints()
     }
+    // Method to setup the gradient background
+        func setupGradientBackground() {
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.frame = bounds
+            
+            // Define gradient colors with alpha for transparency
+            gradientLayer.colors = [
+                UIColor.systemBlue.withAlphaComponent(0.1).cgColor,  // Light blue
+                UIColor.white.cgColor  // White color
+            ]
+            
+            gradientLayer.locations = [0.0, 1.0]
+            layer.insertSublayer(gradientLayer, at: 0) // Add the gradient as the background layer
+        }
+        
+        // Update gradient background on bounds change (important for rotation/resizing)
+        override func layoutSubviews() {
+            super.layoutSubviews()
+            if let gradientLayer = layer.sublayers?.first(where: { $0 is CAGradientLayer }) as? CAGradientLayer {
+                gradientLayer.frame = bounds
+            }
+        }
     
     func setupLabelWelcome(){
         labelWelcome = UILabel()
@@ -79,7 +104,7 @@ class MainScreenView: UIView {
             
             // Set the button background color to white
             buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
-            buttonConfig.background.backgroundColor = .white  // Set the background color to white
+            buttonConfig.background.backgroundColor = .clear  // Set the background color to white
             
             // Set the title color using attributedTitle
             buttonConfig.attributedTitle = AttributedString("Array", attributes: .init([.foregroundColor: UIColor.black]))
@@ -154,7 +179,7 @@ class MainScreenView: UIView {
             
             // Set the button background color to white
             buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
-            buttonConfig.background.backgroundColor = .white  // Set the background color to white
+            buttonConfig.background.backgroundColor = .clear  // Set the background color to white
             
             // Set the title color using attributedTitle
             buttonConfig.attributedTitle = AttributedString("String", attributes: .init([.foregroundColor: UIColor.black]))
@@ -220,7 +245,7 @@ class MainScreenView: UIView {
             
             // Set the button background color to white
             buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
-            buttonConfig.background.backgroundColor = .white  // Set the background color to white
+            buttonConfig.background.backgroundColor = .clear  // Set the background color to white
             
             // Set the title color using attributedTitle
             buttonConfig.attributedTitle = AttributedString("Sliding window", attributes: .init([.foregroundColor: UIColor.black]))
@@ -278,7 +303,7 @@ class MainScreenView: UIView {
             
             // Set the button background color to white
             buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
-            buttonConfig.background.backgroundColor = .white  // Set the background color to white
+            buttonConfig.background.backgroundColor = .clear  // Set the background color to white
             
             // Set the title color using attributedTitle
             buttonConfig.attributedTitle = AttributedString("Two pointer", attributes: .init([.foregroundColor: UIColor.black]))
@@ -294,6 +319,9 @@ class MainScreenView: UIView {
             // Optionally, you can set the border properties directly to the button's image view, like so:
             button4.imageView?.layer.borderColor = UIColor.black.cgColor
             button4.imageView?.layer.borderWidth = 2.0
+            
+            // Set fixed image height to ensure same size across buttons
+            button4.imageView?.frame = CGRect(x: 0, y: 0, width: 120, height: 120)
             
             // Ensure the content is centered
             button4.contentHorizontalAlignment = .center
@@ -324,7 +352,7 @@ class MainScreenView: UIView {
 
             // Set the resized image and title for the button
             buttonConfig.image = resizedImage
-            buttonConfig.title = "Tree"
+            buttonConfig.title = "Tree           "
             
             // Set the layout of the image and title
             buttonConfig.imagePlacement = .top       // Places the image at the top
@@ -333,7 +361,7 @@ class MainScreenView: UIView {
             
             // Set the button background color to white
             buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
-            buttonConfig.background.backgroundColor = .white  // Set the background color to white
+            buttonConfig.background.backgroundColor = .clear  // Set the background color to white
             
             // Set the title color using attributedTitle
             buttonConfig.attributedTitle = AttributedString("Tree", attributes: .init([.foregroundColor: UIColor.black]))
@@ -349,6 +377,9 @@ class MainScreenView: UIView {
             // Optionally, you can set the border properties directly to the button's image view, like so:
             button5.imageView?.layer.borderColor = UIColor.black.cgColor
             button5.imageView?.layer.borderWidth = 2.0
+            
+            // Set fixed image height to ensure same size across buttons
+            button5.imageView?.frame = CGRect(x: 0, y: 0, width: 120, height: 120)
             
             // Ensure the content is centered
             button5.contentHorizontalAlignment = .center
@@ -385,7 +416,7 @@ class MainScreenView: UIView {
             
             // Set the button background color to white
             buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
-            buttonConfig.background.backgroundColor = .white  // Set the background color to white
+            buttonConfig.background.backgroundColor = .clear  // Set the background color to white
             
             // Set the title color using attributedTitle
             buttonConfig.attributedTitle = AttributedString("Graph", attributes: .init([.foregroundColor: UIColor.black]))
@@ -404,6 +435,9 @@ class MainScreenView: UIView {
             // Optionally, you can set the border properties directly to the button's image view, like so:
             button6.imageView?.layer.borderColor = UIColor.black.cgColor
             button6.imageView?.layer.borderWidth = 2.0
+            
+            // Set fixed image height to ensure same size across buttons
+            button6.imageView?.frame = CGRect(x: 0, y: 0, width: 120, height: 120)
             
             // Ensure the content is centered
             button6.contentHorizontalAlignment = .center
@@ -440,7 +474,7 @@ class MainScreenView: UIView {
             
             // Set the button background color to white
             buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
-            buttonConfig.background.backgroundColor = .white  // Set the background color to white
+            buttonConfig.background.backgroundColor = .clear  // Set the background color to white
             
             // Set the title color using attributedTitle
             buttonConfig.attributedTitle = AttributedString("Stack", attributes: .init([.foregroundColor: UIColor.black]))
@@ -494,7 +528,7 @@ class MainScreenView: UIView {
             
             // Set the button background color to white
             buttonConfig.background = UIBackgroundConfiguration.clear() // Transparent background
-            buttonConfig.background.backgroundColor = .white  // Set the background color to white
+            buttonConfig.background.backgroundColor = .clear  // Set the background color to white
             
             // Set the title color using attributedTitle
             buttonConfig.attributedTitle = AttributedString("Queue", attributes: .init([.foregroundColor: UIColor.black]))
@@ -533,6 +567,8 @@ class MainScreenView: UIView {
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually // Distribute buttons equally within the stack
         stackView.spacing = 16 // Space between buttons
+        // Align the stack view items at the top of the stack
+        stackView.alignment = .top
         stackView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(stackView) // Add stackView to the view
         
@@ -541,6 +577,8 @@ class MainScreenView: UIView {
         stackView2.axis = .horizontal
         stackView2.distribution = .fillEqually // Distribute buttons equally within the stack
         stackView2.spacing = 16 // Space between buttons
+        // Align the stack view items at the top of the stack
+        stackView2.alignment = .top
         stackView2.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(stackView2) // Add stackView to the view
         
@@ -563,22 +601,22 @@ class MainScreenView: UIView {
             
             //button1.trailingAnchor.constraint(equalTo: self.button2.leadingAnchor, constant: -16),
             
-            labelRecommendForYouList.topAnchor.constraint(equalTo: self.button1.bottomAnchor, constant: 8),
+            labelRecommendForYouList.topAnchor.constraint(equalTo: self.button1.bottomAnchor, constant: 4),
             labelRecommendForYouList.leadingAnchor.constraint(equalTo: self.labelWelcome.leadingAnchor),
             
             
             // Stack View Constraints for button3, button4, button5
-            stackView.topAnchor.constraint(equalTo: self.labelRecommendForYouList.bottomAnchor, constant: 60),
+            stackView.topAnchor.constraint(equalTo: self.labelRecommendForYouList.bottomAnchor, constant: 30),
             stackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            stackView.heightAnchor.constraint(equalToConstant: 60), // Height for all buttons
+            stackView.heightAnchor.constraint(equalToConstant: 120), // Height for all buttons
             stackView.widthAnchor.constraint(equalToConstant: 80), // Height for all buttons
             
             // Stack View Constraints for button6, button7, button8
-            stackView2.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 100),
+            stackView2.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
             stackView2.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             stackView2.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            stackView2.heightAnchor.constraint(equalToConstant: 60), // Height for all buttons
+            stackView2.heightAnchor.constraint(equalToConstant: 80), // Height for all buttons
             stackView2.widthAnchor.constraint(equalToConstant: 80) // Height for all buttons
 
         ])
@@ -592,4 +630,6 @@ class MainScreenView: UIView {
     
 
 }
+
+
 
