@@ -38,7 +38,7 @@
 		BE32433A2D028AC70082FF21 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3243372D028AC70082FF21 /* Comment.swift */; };
 		BE32433B2D028AC70082FF21 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3243352D028AC70082FF21 /* User.swift */; };
 		BE32433E2D02A7620082FF21 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32433D2D02A7620082FF21 /* AppManager.swift */; };
-		CB0606A42D03E26200B6E1DB /* Instructions in Frameworks */ = {isa = PBXBuildFile; productRef = CB0606A32D03E26200B6E1DB /* Instructions */; };
+		CB0606A72D0531D800B6E1DB /* Instructions in Frameworks */ = {isa = PBXBuildFile; productRef = CB0606A62D0531D800B6E1DB /* Instructions */; };
 		CB079A592CF92B7E00D1D22A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB079A582CF92B7E00D1D22A /* AppDelegate.swift */; };
 		CB079A5B2CF92B7E00D1D22A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB079A5A2CF92B7E00D1D22A /* SceneDelegate.swift */; };
 		CB079A5D2CF92B7E00D1D22A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB079A5C2CF92B7E00D1D22A /* ViewController.swift */; };
@@ -141,7 +141,7 @@
 				CB079A842CFD4E8E00D1D22A /* FirebaseStorage in Frameworks */,
 				CB079A7E2CFD4E8E00D1D22A /* FirebaseAuth in Frameworks */,
 				1E508BCA2D02797400E7BC65 /* GoogleSignIn in Frameworks */,
-				CB0606A42D03E26200B6E1DB /* Instructions in Frameworks */,
+				CB0606A72D0531D800B6E1DB /* Instructions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,7 +360,7 @@
 				1E508BC92D02797400E7BC65 /* GoogleSignIn */,
 				1E508BCB2D02797400E7BC65 /* GoogleSignInSwift */,
 				1E508BD42D027E8500E7BC65 /* FacebookLogin */,
-				CB0606A32D03E26200B6E1DB /* Instructions */,
+				CB0606A62D0531D800B6E1DB /* Instructions */,
 			);
 			productName = team39_FinalProject;
 			productReference = CB079A552CF92B7E00D1D22A /* team39_FinalProject.app */;
@@ -395,7 +395,7 @@
 				CB079A8A2CFD51FC00D1D22A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				1E508BC82D02797400E7BC65 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				1E508BD32D027E8500E7BC65 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
-				CB0606A22D03E26200B6E1DB /* XCRemoteSwiftPackageReference "Instructions" */,
+				CB0606A52D0531D800B6E1DB /* XCRemoteSwiftPackageReference "Instructions" */,
 			);
 			productRefGroup = CB079A562CF92B7E00D1D22A /* Products */;
 			projectDirPath = "";
@@ -761,7 +761,7 @@
 				minimumVersion = 14.1.0;
 			};
 		};
-		CB0606A22D03E26200B6E1DB /* XCRemoteSwiftPackageReference "Instructions" */ = {
+		CB0606A52D0531D800B6E1DB /* XCRemoteSwiftPackageReference "Instructions" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ephread/Instructions";
 			requirement = {
@@ -803,9 +803,9 @@
 			package = 1E508BD32D027E8500E7BC65 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookLogin;
 		};
-		CB0606A32D03E26200B6E1DB /* Instructions */ = {
+		CB0606A62D0531D800B6E1DB /* Instructions */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CB0606A22D03E26200B6E1DB /* XCRemoteSwiftPackageReference "Instructions" */;
+			package = CB0606A52D0531D800B6E1DB /* XCRemoteSwiftPackageReference "Instructions" */;
 			productName = Instructions;
 		};
 		CB079A7D2CFD4E8E00D1D22A /* FirebaseAuth */ = {
