@@ -28,7 +28,7 @@ class QuestionScreenViewController: UIViewController {
         questionList.append(Question(questionFrontendId: "23", title: "Three", titleSlug: "Three", difficulty: "Hard"))
         questionList.append(Question(questionFrontendId: "3", title: "Three", titleSlug: "Three", difficulty: "Hard"))
         */
-        
+        navigationController?.navigationBar.prefersLargeTitles = true
         //get all questions when the main screen loads...
         getAllQuestions()
         
