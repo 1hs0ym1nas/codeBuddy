@@ -1,32 +1,5 @@
 import Foundation
 
-/*
-struct User {
-    let userID: String
-    let userName: String
-    var profilePic: String?
-    var email: String
-    var answers: [String: Answer]
-    var solvedQuestions: [Answer] 
-    var score: Int {
-        answers.values.filter { $0.isCompleted }.count
-    }
-}
-
-extension User {
-    static func mockUser() -> User {
-        return User(
-            userID: "mockUser123",
-            userName: "Mock User",
-            profilePic: nil,
-            email: "mockuser@example.com",
-            answers: [:], 
-            solvedQuestions: []
-        )
-    }
-}
- */
-
 struct QuestionListItem: Codable {
     var questionFrontendId: String
     var title: String

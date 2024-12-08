@@ -39,5 +39,3 @@ struct QuestionAPIResponse: Codable {
     let link: String
     let exampleTestcases: String
 }
-
-

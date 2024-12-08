@@ -12,7 +12,7 @@ import FirebaseAuth
 class CommentManager {
     // MARK: - Properties
     private let db = Firestore.firestore()
-    private let commentsCollection = "comments" // Firebase 集合名称
+    private let commentsCollection = "comments"
     private var commentsListener: ListenerRegistration?
 
     // MARK: - Load Comments
@@ -48,11 +48,11 @@ class CommentManager {
         }
 
         var commentData = comment.toDictionary()
-        commentData["commentID"] = nil // Firebase 自动生成 ID
+        commentData["commentID"] = nil
 
         
         let documentRef = db.collection(commentsCollection).document()
-        commentData["commentID"] = documentRef.documentID // 设置生成的 documentID
+        commentData["commentID"] = documentRef.documentID 
 
         
         documentRef.setData(commentData) { error in

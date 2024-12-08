@@ -56,7 +56,6 @@
 		CB079A952CFD6E3E00D1D22A /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB079A942CFD6E3E00D1D22A /* QuestionView.swift */; };
 		CB079A982CFD6EEA00D1D22A /* AnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB079A972CFD6EEA00D1D22A /* AnswerView.swift */; };
 		CB079A9A2CFD6EF500D1D22A /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB079A992CFD6EF500D1D22A /* AnswerViewController.swift */; };
-		CB079A9C2CFD77AB00D1D22A /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB079A9B2CFD77AB00D1D22A /* HomeScreen.swift */; };
 		CB5BA7FC2CFEAA5300130A24 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5BA7FB2CFEAA5300130A24 /* MainScreenView.swift */; };
 		CB5BA7FE2CFEAA5F00130A24 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5BA7FD2CFEAA5F00130A24 /* MainScreenViewController.swift */; };
 		CB5BA8022CFEAB8C00130A24 /* QuestionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5BA8012CFEAB8C00130A24 /* QuestionScreenView.swift */; };
@@ -113,7 +112,6 @@
 		CB079A942CFD6E3E00D1D22A /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		CB079A972CFD6EEA00D1D22A /* AnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerView.swift; sourceTree = "<group>"; };
 		CB079A992CFD6EF500D1D22A /* AnswerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerViewController.swift; sourceTree = "<group>"; };
-		CB079A9B2CFD77AB00D1D22A /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		CB5BA7FB2CFEAA5300130A24 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		CB5BA7FD2CFEAA5F00130A24 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		CB5BA8012CFEAB8C00130A24 /* QuestionScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionScreenView.swift; sourceTree = "<group>"; };
@@ -249,18 +247,20 @@
 		CB079A572CF92B7E00D1D22A /* team39_FinalProject */ = {
 			isa = PBXGroup;
 			children = (
-				18D0F88A2D03D21C0097A09F /* NotificationNames.swift */,
-				BE3243202D028A8C0082FF21 /* DiscussionScreen */,
-				BE3243242D028A8C0082FF21 /* FirebaseHelper */,
-				BE3243292D028A8C0082FF21 /* UserScreen */,
-				185629572D023EF10014C1C9 /* Login */,
-				185629512D023EE60014C1C9 /* Register */,
 				1856294C2D023E890014C1C9 /* LandingView.swift */,
+				185629512D023EE60014C1C9 /* Register */,
+				185629572D023EF10014C1C9 /* Login */,
+				CB5BA7FA2CFEAA3400130A24 /* Main Screen */,
+				BE3243202D028A8C0082FF21 /* DiscussionScreen */,
+				BE3243292D028A8C0082FF21 /* UserScreen */,
 				CB5BA80D2CFEAE1800130A24 /* LeaderBoard Screen */,
 				CB5BA80C2CFEAE0900130A24 /* Profile Screen */,
-				CB5BA7FA2CFEAA3400130A24 /* Main Screen */,
-				CB079A962CFD6ED800D1D22A /* Answer Screen */,
 				CB079A912CFD6DE600D1D22A /* Question Screen */,
+				CB079A962CFD6ED800D1D22A /* Answer Screen */,
+				BE3243382D028AC70082FF21 /* Models */,
+				BE3243242D028A8C0082FF21 /* FirebaseHelper */,
+				CB079A8F2CFD6C1800D1D22A /* AFHelper.swift */,
+				CB5BA8162CFEB25F00130A24 /* APIConfigs.swift */,
 				CB079A582CF92B7E00D1D22A /* AppDelegate.swift */,
 				CB079A5A2CF92B7E00D1D22A /* SceneDelegate.swift */,
 				CB079A5C2CF92B7E00D1D22A /* ViewController.swift */,
@@ -269,12 +269,8 @@
 				CB079A632CF92B8100D1D22A /* LaunchScreen.storyboard */,
 				CB079A662CF92B8100D1D22A /* Info.plist */,
 				CB079A6C2CF92C7D00D1D22A /* GoogleService-Info.plist */,
-				BE3243382D028AC70082FF21 /* Models */,
-				CB079A8F2CFD6C1800D1D22A /* AFHelper.swift */,
-				CB079A9B2CFD77AB00D1D22A /* HomeScreen.swift */,
+				18D0F88A2D03D21C0097A09F /* NotificationNames.swift */,
 				CB5BA8092CFEAD7900130A24 /* Configs.swift */,
-				CB5BA8162CFEB25F00130A24 /* APIConfigs.swift */,
-				CB5BA8182CFEEE6500130A24 /* CountdownManager.swift */,
 				185A49C82D01538200FBC2E0 /* LogInViewController.swift */,
 				185A49CA2D0153C400FBC2E0 /* LogIn.storyboard */,
 				BE32433D2D02A7620082FF21 /* AppManager.swift */,
@@ -291,6 +287,7 @@
 				CB5BA8032CFEABC200130A24 /* QuestionTableViewCell.swift */,
 				CB5BA8052CFEABF900130A24 /* QuestionTableViewManager.swift */,
 				CB5BA8072CFEAC8200130A24 /* QuestionScreenViewController.swift */,
+				CB5BA8182CFEEE6500130A24 /* CountdownManager.swift */,
 			);
 			path = "Question Screen";
 			sourceTree = "<group>";
@@ -469,7 +466,6 @@
 				CB079A952CFD6E3E00D1D22A /* QuestionView.swift in Sources */,
 				CB079A592CF92B7E00D1D22A /* AppDelegate.swift in Sources */,
 				1E508BCE2D027A4E00E7BC65 /* LeaderboardView.swift in Sources */,
-				CB079A9C2CFD77AB00D1D22A /* HomeScreen.swift in Sources */,
 				CB5BA7FC2CFEAA5300130A24 /* MainScreenView.swift in Sources */,
 				BE32432A2D028A8C0082FF21 /* UserProfileView.swift in Sources */,
 				BE32432B2D028A8C0082FF21 /* EditProfileViewController.swift in Sources */,

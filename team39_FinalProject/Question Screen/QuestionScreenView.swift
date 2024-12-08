@@ -1,7 +1,7 @@
 import UIKit
 
 class QuestionScreenView: UIView {
-
+    
     var searchPic: UIImageView!
     var textFieldSearch: UITextField!
     var tableViewQuestions: UITableView!
@@ -13,7 +13,7 @@ class QuestionScreenView: UIView {
         setupSearchPic()
         setupTextFieldSearch()
         setupTableViewQuestions()
-    
+        
         initConstraints()
     }
     
@@ -28,8 +28,6 @@ class QuestionScreenView: UIView {
         searchPic.clipsToBounds = true
         searchPic.layer.masksToBounds = true
         searchPic.translatesAutoresizingMaskIntoConstraints = false
-        // Set the background color to blue
-        //searchPic.backgroundColor = .blue
         self.addSubview(searchPic)
     }
     
@@ -51,7 +49,7 @@ class QuestionScreenView: UIView {
         self.addSubview(tableViewQuestions)
         
     }
-
+    
     func initConstraints(){
         NSLayoutConstraint.activate([
             
@@ -80,7 +78,5 @@ class QuestionScreenView: UIView {
         ])
     }
     
-            
-
 }
 

@@ -15,8 +15,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         guard let winScene = (scene as? UIWindowScene) else { return }
         
-        // we need to set it to false - for Thanda
-        //UserDefaults.standard.set(false, forKey: "isLoggedIn")
         
         // Retrieve the 'isLoggedIn' value from UserDefaults
         let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
