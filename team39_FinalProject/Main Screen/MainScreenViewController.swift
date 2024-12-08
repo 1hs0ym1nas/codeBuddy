@@ -1,12 +1,18 @@
 import UIKit
+import Instructions
 import Firebase
 import FirebaseAuth
 
-class MainScreenViewController: UIViewController {
+
+class MainScreenViewController: UIViewController,CoachMarksControllerDataSource,
+                                CoachMarksControllerDelegate{
+    
+    let coachMarksController = CoachMarksController()
     
     var handleAuth: AuthStateDidChangeListenerHandle?
     var currentUser: FirebaseAuth.User?
     let mainScreenView = MainScreenView()
+    
     
     override func loadView() {
         view = mainScreenView
@@ -14,6 +20,9 @@ class MainScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.coachMarksController.dataSource = self
+        self.coachMarksController.delegate = self
+        
         
         // Create the bar button item
         let barIcon = UIBarButtonItem(
@@ -36,12 +45,102 @@ class MainScreenViewController: UIViewController {
         mainScreenView.button7.addTarget(self, action: #selector(onHButton7Tappped), for: .touchUpInside)
         mainScreenView.button8.addTarget(self, action: #selector(onHButton8Tappped), for: .touchUpInside)
     }
+                                      
+    func shouldShowCoachMarks() -> Bool {
+            return UserDefaults.standard.bool(forKey: "isFirstLogin")
+    }
+                                      
+                                      
+    // logic for adding instructions to new users
+    func coachMarksController(_ coachMarksController: Instructions.CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: Instructions.CoachMark) -> (bodyView: (any UIView & Instructions.CoachMarkBodyView), arrowView: (any UIView & Instructions.CoachMarkArrowView)?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            withArrow: true,
+            arrowOrientation: coachMark.arrowOrientation
+        )
+        
+        coachViews.bodyView.hintLabel.textColor = .systemBlue
+        coachViews.bodyView.hintLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        coachViews.bodyView.hintLabel.textAlignment = .center
+        
+        coachViews.bodyView.nextLabel.textColor = .systemBlue
+        coachViews.bodyView.nextLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        coachViews.bodyView.nextLabel.layer.cornerRadius = 4
+        coachViews.bodyView.nextLabel.clipsToBounds = true
+        coachViews.bodyView.nextLabel.textAlignment = .center
+        
+        switch index {
+        case 0:
+            coachViews.bodyView.hintLabel.text = "Welcome to Codebuddy👏\nTap a problem set to start practicing\nClick 'Next' to continue"
+            coachViews.bodyView.nextLabel.text = "Next  >"
+        case 1:
+            coachViews.bodyView.hintLabel.text = "Tap here to view all the problem sets\nClick 'Next' to continue"
+            coachViews.bodyView.nextLabel.text = "Next  >"
+        case 2:
+            coachViews.bodyView.hintLabel.text = "Tap here to add and view comments\nClick 'Next' to continue"
+            coachViews.bodyView.nextLabel.text = "Next  >"
+        case 3:
+            coachViews.bodyView.hintLabel.text = "Tap here to view your profile\nClick 'Next' to continue"
+            coachViews.bodyView.nextLabel.text = "Next  >"
+        case 4:
+            coachViews.bodyView.hintLabel.text = "Tap here to see user rankings\nClick 'Next' to continue"
+            coachViews.bodyView.nextLabel.text = "Next  >"
+        case 5:
+            coachViews.bodyView.hintLabel.text = "You got it! \nHave fun exploring more🤠"
+            coachViews.bodyView.nextLabel.text = "Let's go  >"
+            
+        default:
+            break
+        }
+        
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+    }
+    
+    let pointOfInterest = UIView()
+    func coachMarksController(_ coachMarksController: Instructions.CoachMarksController, coachMarkAt index: Int) -> Instructions.CoachMark {
+        let tabBar = self.tabBarController?.tabBar
+        
+        switch index {
+        case 0:
+            return coachMarksController.helper.makeCoachMark(for: mainScreenView.button1)
+        case 1:
+            if let homeButtonView = tabBar?.items?.first?.value(forKey: "view") as? UIView {
+                return coachMarksController.helper.makeCoachMark(for: homeButtonView)
+            }
+        case 2:
+            if let discussionButtonView = tabBar?.items?[1].value(forKey: "view") as? UIView {
+                return coachMarksController.helper.makeCoachMark(for: discussionButtonView)
+            }
+        case 3:
+            if let profileButtonView = tabBar?.items?[2].value(forKey: "view") as? UIView {
+                return coachMarksController.helper.makeCoachMark(for: profileButtonView)
+            }
+        case 4:
+            if let leaderBoardButtonView = tabBar?.items?[3].value(forKey: "view") as? UIView {
+                return coachMarksController.helper.makeCoachMark(for: leaderBoardButtonView)
+            }
+        case 5:
+            if let leaderBoardButtonView = tabBar?.items?[3].value(forKey: "view") as? UIView {
+                return coachMarksController.helper.makeCoachMark(for: leaderBoardButtonView)
+            }
+            
+        default:
+            break
+        }
+        return coachMarksController.helper.makeCoachMark()
+    }
+    
+    func numberOfCoachMarks(for coachMarksController: Instructions.CoachMarksController) -> Int {
+        return 6
+    }
+
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Fetch the updated username from Firestore
         fetchUpdatedUsername()
+        
     }
     
     private func fetchUpdatedUsername() {
@@ -67,6 +166,21 @@ class MainScreenViewController: UIViewController {
                 self.mainScreenView.labelWelcome.text = "Welcome \(updatedUsername)!"
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if shouldShowCoachMarks() {
+            coachMarksController.start(in: .currentWindow(of: self))
+            UserDefaults.standard.set(false, forKey: "isFirstLogin")
+        }
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.coachMarksController.stop(immediately: true)
     }
     
     @objc func onLogOutBarButtonTapped() {

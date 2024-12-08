@@ -47,6 +47,8 @@ class RegisterViewController: UIViewController {
     
     @objc private func onRegisterTapped() {
         registerNewAccount()
+        UserDefaults.standard.set(true, forKey: "isFirstLogin")
+        
 
         let alert = UIAlertController(
             title: "Success",

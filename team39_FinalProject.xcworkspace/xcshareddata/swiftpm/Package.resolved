@@ -1,5 +1,5 @@
 {
-  "originHash" : "ceb6b24c50b8e86fd7b8a0d991da353c51bc8683b75319c1d1aa7d2740ae9732",
+  "originHash" : "67f840845e8b949f961612542e8908764c59ceac918ff720c0a84c047122b52c",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -51,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk",
       "state" : {
-        "revision" : "dbdfdc44bee8b8e4eaa5ec27eb12b9338f3f2bc1",
-        "version" : "11.5.0"
+        "revision" : "2e02253fd1ce99145bcbf1bb367ccf61bd0ca46b",
+        "version" : "11.6.0"
       }
     },
     {
@@ -116,6 +116,15 @@
       "state" : {
         "revision" : "5d7d66f647400952b1758b230e019b07c0b4b22a",
         "version" : "4.1.1"
+      }
+    },
+    {
+      "identity" : "instructions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ephread/Instructions",
+      "state" : {
+        "revision" : "54f50ec058a118107178f641f7475db353080c6d",
+        "version" : "2.3.0"
       }
     },
     {
