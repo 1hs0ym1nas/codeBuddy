@@ -46,17 +46,39 @@ class RegisterViewController: UIViewController {
     }
     
     @objc private func onRegisterTapped() {
-        registerNewAccount()
-        UserDefaults.standard.set(true, forKey: "isFirstLogin")
-        
 
-        let alert = UIAlertController(
-            title: "Success",
-            message: "Registered successfully! Please log in.",
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        guard let password = registerView.passwordTextField.text,
+              let confirmPassword = registerView.confirmPasswordTextField.text else {
+            return
+        }
         
-        present(alert, animated: true, completion: nil)
+        // Check if passwords match
+        if password != confirmPassword {
+            // Show error alert
+            let alert = UIAlertController(
+                title: "Error",
+                message: "Passwords do not match. Please try again.",
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        // Proceed with registration
+        registerNewAccount { isSuccess in
+            if isSuccess {
+                let alert = UIAlertController(
+                    title: "Success",
+                    message: "Registered successfully! Please log in.",
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                UserDefaults.standard.set(true, forKey: "isFirstLogin")
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
     }
+
+
 }

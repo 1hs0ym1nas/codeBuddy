@@ -12,37 +12,55 @@ import UIKit
 
 extension RegisterViewController {
     
-    func registerNewAccount() {
-            guard let name = registerView.usernameTextField.text, !name.isEmpty else {
+
+    func registerNewAccount(completion: @escaping (Bool) -> Void) {
+        guard let name = registerView.usernameTextField.text, !name.isEmpty else {
             showAlert(message: "Username field cannot be empty.")
+            completion(false)
             return
         }
         
         guard let email = registerView.emailTextField.text, !email.isEmpty, isValidEmail(email) else {
             showAlert(message: "Please enter a valid email address.")
+            completion(false)
             return
         }
         
         guard let password = registerView.passwordTextField.text, !password.isEmpty else {
             showAlert(message: "Password field cannot be empty.")
+            completion(false)
             return
         }
         
         // Create Firebase user with email and password
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            if error == nil {
-                // The user creation is successful, set the display name
-                self.setNameOfTheUserInFirebaseAuth(name: name)
-                
-                // Store additional user data in Firestore
-                if let userID = result?.user.uid {
-                    self.storeUserDataInFirestore(name: name, email: email, userID: userID)
+            if let error = error as NSError? {
+                if let authErrorCode = AuthErrorCode(rawValue: error.code) {
+                    switch authErrorCode {
+                    case .emailAlreadyInUse:
+                        self.showAlert(message: "The email address is already in use. Please use a different email.")
+                    default:
+                        self.showAlert(message: "An error occurred: \(error.localizedDescription)")
+                    }
+                } else {
+                    self.showAlert(message: "An unknown error occurred. Please try again.")
                 }
-            } else {
-                self.showAlert(message: error?.localizedDescription ?? "An error occurred. Please try again.")
+                completion(false)
+                return
             }
+            
+            // The user creation is successful, set the display name
+            self.setNameOfTheUserInFirebaseAuth(name: name)
+            
+            // Store additional user data in Firestore
+            if let userID = result?.user.uid {
+                self.storeUserDataInFirestore(name: name, email: email, userID: userID)
+            }
+            completion(true)
         }
     }
+
+
     
     // Helper function to validate email format
     func isValidEmail(_ email: String) -> Bool {

@@ -13,7 +13,7 @@ class LeaderboardCell: UITableViewCell {
         imageView.image = UIImage(systemName: "crown.fill")
         imageView.tintColor = .systemYellow
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.isHidden = true // Hidden by default
+        imageView.isHidden = true
         return imageView
     }()
 
