@@ -41,7 +41,12 @@ class QuestionViewController: UIViewController {
                     self?.questionView.updateTitle(self?.formatTitleSlug(question.titleSlug) ?? question.titleSlug)
 //                    self?.questionView.updateTitle(question.titleSlug)
                 case .failure(let error):
-                    self?.showErrorAlert(message: error.localizedDescription)
+//                    self?.showErrorAlert(message: error.localizedDescription)
+                    if let networkError = error as? NetworkError, networkError == .premiumQuestion {
+                                            self?.showPremiumQuestionAlert(titleSlug: self?.titleSlug ?? "")
+                    } else {
+                        self?.showErrorAlert(message: error.localizedDescription)
+                    }
                 }
             }
         }
@@ -138,7 +143,27 @@ class QuestionViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
+    
+    private func showPremiumQuestionAlert(titleSlug: String) {
+            let alert = UIAlertController(
+                title: "⁉️ Premium Question",
+                message: "We are sorry, this question is not visible since it is a premium question on LeetCode.com. Press 'View on LeetCode' to check details there.",
+                preferredStyle: .alert
+            )
 
+            alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }))
+
+            alert.addAction(UIAlertAction(title: "View on LeetCode", style: .default, handler: { _ in
+                if let url = URL(string: "https://leetcode.com/problems/\(titleSlug)") {
+                    UIApplication.shared.open(url)
+                }
+            }))
+
+            present(alert, animated: true)
+        }
+    
     @objc private func didTapBack() {
         navigationController?.popViewController(animated: true)
     }

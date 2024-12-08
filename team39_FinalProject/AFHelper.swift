@@ -24,7 +24,7 @@ class NetworkManager {
                 )
                 completion(.success(question))
             case .failure(let error):
-                completion(.failure(error))
+                completion(.failure(NetworkError.premiumQuestion))
             }
         }
     }
@@ -38,4 +38,8 @@ struct QuestionAPIResponse: Codable {
     let difficulty: String
     let link: String
     let exampleTestcases: String
+}
+
+enum NetworkError: Error {
+    case premiumQuestion
 }
