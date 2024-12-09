@@ -37,19 +37,6 @@ class AnswerViewController: UIViewController, SFSpeechRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Request Speech recognition permission
-//        SFSpeechRecognizer.requestAuthorization { status in
-//                    DispatchQueue.main.async {
-//                        switch status {
-//                        case .authorized:
-//                            print("Speech recognition authorized.")
-//                        case .denied, .restricted, .notDetermined:
-//                            print("Speech recognition is not available.")
-//                        @unknown default:
-//                            print("Unknown authorization status.")
-//                        }
-//                    }
-//                }
         setupVoiceInputButton()
 
         answerView.saveButton.addTarget(self, action: #selector(didTapSave), for: .touchUpInside)
@@ -96,7 +83,7 @@ class AnswerViewController: UIViewController, SFSpeechRecognizerDelegate {
                 }
                 guard let data = snapshot?.data(),
                       let answerText = data["answerText"] as? String else {
-                    self.answerView.textView.text = "" // 没有获取到 answerText，显示空字符串
+                    self.answerView.textView.text = ""
                     return
                 }
                 
